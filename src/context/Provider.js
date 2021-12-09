@@ -11,7 +11,7 @@ function Provider({ children }) {
   const statesAndFunctions = {
     searchBarValue,
     setSearchBarValue,
-  }
+  };
   return (
     <MyContext.Provider value={ statesAndFunctions }>
       { children }

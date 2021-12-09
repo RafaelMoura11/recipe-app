@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
@@ -10,7 +9,7 @@ export default function Header() {
 
   const searchBarState = {
     searchBar,
-  }
+  };
 
   return (
     <div>
@@ -27,23 +26,18 @@ export default function Header() {
         Explorar
       </h1>
       <SearchBar searchBarState={ searchBarState } />
-          <button
-            type="button"
-            onClick={ () => setSearchBar(!searchBar) }
-          >
-            <img
-              src={ searchIcon }
-              alt="Search Icon"
-              data-testid="search-top-btn"
-            />
-          </button>
+      <button
+        type="button"
+        onClick={ () => setSearchBar(!searchBar) }
+      >
+        <img
+          src={ searchIcon }
+          alt="Search Icon"
+          data-testid="search-top-btn"
+        />
+      </button>
       {/* {searchBar
         && <input type="text" data-testid="search-input" />} */}
     </div>
   );
 }
-
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
-  enable: PropTypes.bool.isRequired,
-};
