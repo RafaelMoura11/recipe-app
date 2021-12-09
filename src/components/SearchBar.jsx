@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import MyContext from '../context/MyContext';
 import searchAPIFromSearch from '../services';
 
-function SearchBar({ searchBarState: { searchBar } }) {
+function SearchBar() {
   const { searchBarValue, setSearchBarValue } = useContext(MyContext);
   const handleChange = ({ target: { name, value } }) => (
     setSearchBarValue({ ...searchBarValue, [name]: value })
@@ -16,7 +15,7 @@ function SearchBar({ searchBarState: { searchBar } }) {
   };
 
   return (
-    <div hidden={ searchBar }>
+    <div>
       <div onChange={ handleChange }>
         <input
           type="radio"
@@ -60,11 +59,5 @@ function SearchBar({ searchBarState: { searchBar } }) {
     </div>
   );
 }
-
-SearchBar.propTypes = {
-  searchBarState: PropTypes.objectOf({
-    searchBar: PropTypes.bool,
-  }).isRequired,
-};
 
 export default SearchBar;

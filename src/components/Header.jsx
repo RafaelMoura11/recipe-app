@@ -1,15 +1,12 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-export default function Header() {
-  const [searchBar, setSearchBar] = useState(true);
-
-  const searchBarState = {
-    searchBar,
-  };
+export default function Header({ title, enable = true }) {
+  const [searchBar, setSearchBar] = useState(false);
 
   return (
     <div>
@@ -23,21 +20,28 @@ export default function Header() {
       <h1
         data-testid="page-title"
       >
-        Explorar
+        {title}
       </h1>
-      <SearchBar searchBarState={ searchBarState } />
-      <button
-        type="button"
-        onClick={ () => setSearchBar(!searchBar) }
-      >
-        <img
-          src={ searchIcon }
-          alt="Search Icon"
-          data-testid="search-top-btn"
-        />
-      </button>
-      {/* {searchBar
-        && <input type="text" data-testid="search-input" />} */}
+      {enable
+        && (
+          <button
+            type="button"
+            onClick={ () => setSearchBar(!searchBar) }
+          >
+            <img
+              src={ searchIcon }
+              alt="Search Icon"
+              data-testid="search-top-btn"
+            />
+          </button>
+        )}
+      {searchBar
+        && <SearchBar />}
     </div>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  enable: PropTypes.bool.isRequired,
+};
