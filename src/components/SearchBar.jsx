@@ -3,15 +3,22 @@ import MyContext from '../context/MyContext';
 import searchAPIFromSearch from '../services';
 
 function SearchBar() {
-  const { searchBarValue, setSearchBarValue } = useContext(MyContext);
+  const { searchBarValue, setSearchBarValue, setRecipes } = useContext(MyContext);
   const handleChange = ({ target: { name, value } }) => (
     setSearchBarValue({ ...searchBarValue, [name]: value })
   );
 
   const handleClick = async () => {
-    const oxen = await searchAPIFromSearch(searchBarValue['search-bar-option'],
-      searchBarValue['search-bar-value']);
-    console.log(oxen);
+    const { meals, drinks } = await searchAPIFromSearch(
+      searchBarValue['search-bar-option'],
+      searchBarValue['search-bar-value'], searchBarValue.page,
+    );
+    if (!meals && !drinks) {
+      return global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
+    return (meals ? setRecipes(meals) : setRecipes(drinks));
   };
 
   return (

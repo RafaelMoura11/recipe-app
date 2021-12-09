@@ -1,13 +1,20 @@
-const searchAPIFromSearch = async (option, value) => {
+const searchAPIFromSearch = async (option, value, page) => {
   console.log(option);
   console.log(value);
   const objectOfUrl = {
-    Ingrediente: (ingrediente) => `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
-    Nome: (nome) => `https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`,
-    'Primeira letra': (primeiraLetra) => `https://www.themealdb.com/api/json/v1/1/search.php?f=${primeiraLetra}`,
+    comidas: {
+      Ingrediente: (ingrediente) => `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
+      Nome: (nome) => `https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`,
+      'Primeira letra': (primeiraLetra) => `https://www.themealdb.com/api/json/v1/1/search.php?f=${primeiraLetra}`,
+    },
+    bebidas: {
+      Ingrediente: (ingrediente) => `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
+      Nome: (nome) => `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nome}`,
+      'Primeira letra': (primeiraLetra) => `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${primeiraLetra}`,
+    },
   };
   try {
-    const apiResponse = await fetch(objectOfUrl[option](value));
+    const apiResponse = await fetch(objectOfUrl[page][option](value));
     const jsonResponse = await apiResponse.json();
     return jsonResponse;
   } catch (erro) {
