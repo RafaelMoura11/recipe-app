@@ -7,12 +7,13 @@ function SearchBar({ searchBarState: { searchBar } }) {
   const { searchBarValue, setSearchBarValue } = useContext(MyContext);
   const handleChange = ({ target: { name, value } }) => (
     setSearchBarValue({ ...searchBarValue, [name]: value })
-  )
+  );
 
   const handleClick = async () => {
-    const oxen = await searchAPIFromSearch(searchBarValue['search-bar-option'], searchBarValue['search-bar-value'])
+    const oxen = await searchAPIFromSearch(searchBarValue['search-bar-option'],
+      searchBarValue['search-bar-value']);
     console.log(oxen);
-  }
+  };
 
   return (
     <div hidden={ searchBar }>
@@ -42,10 +43,22 @@ function SearchBar({ searchBarState: { searchBar } }) {
         {' '}
         Primeira letra
       </div>
-      <input type="text" onChange={ handleChange } name="search-bar-value" data-testid="search-input" />
-      <button type="button" onClick={ handleClick } data-testid="exec-search-btn">Buscar</button>
+      <input
+        type="text"
+        onChange={ handleChange }
+        name="search-bar-value"
+        data-testid="search-input"
+      />
+      <button
+        type="button"
+        onClick={ handleClick }
+        data-testid="exec-search-btn"
+      >
+        Buscar
+
+      </button>
     </div>
-  )
+  );
 }
 
 SearchBar.propTypes = {
