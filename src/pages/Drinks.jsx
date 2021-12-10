@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import MyContext from '../context/MyContext';
 import Recipe from '../components/Recipe';
 
@@ -26,6 +27,7 @@ export default function Drinks() {
             </Link>)
           )
         )) }
+      <Footer />
     </div>
   );
 }
