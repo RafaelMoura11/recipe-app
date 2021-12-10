@@ -6,11 +6,16 @@ function Provider({ children }) {
   const [searchBarValue, setSearchBarValue] = useState({
     'search-bar-option': '',
     'search-bar-value': '',
+    page: '',
   });
+
+  const [recipes, setRecipes] = useState([]);
 
   const statesAndFunctions = {
     searchBarValue,
     setSearchBarValue,
+    recipes,
+    setRecipes,
   };
   return (
     <MyContext.Provider value={ statesAndFunctions }>
