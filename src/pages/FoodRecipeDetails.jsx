@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { requestRecipeDetailsById, getAllIngredientsFromRecipe,
   requestRecommendedRecipes } from '../services';
-import Ingredient from '../components/Ingredient';
-import RecommendedRecipe from '../components/RecommendedRecipe';
+import RecommendedRecipes from '../components/RecommendedRecipes';
+import IngredientList from '../components/IngredientList';
 
 export default function FoodRecipeDetails({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
@@ -23,8 +22,6 @@ export default function FoodRecipeDetails({ match: { params: { id } } }) {
     getRecipe();
   }, [id]);
 
-  const SEIS = 6;
-
   return (
     (
       recipeDetails
@@ -40,27 +37,12 @@ export default function FoodRecipeDetails({ match: { params: { id } } }) {
         <button type="button" data-testid="favorite-btn">Favorite</button>
         <h4 data-testid="recipe-category">{recipeDetails.strCategory}</h4>
         <ul>
-          {
-            ingredients.map((element, i) => (
-              <Ingredient key={ i } index={ i } ingredient={ element } />
-            ))
-          }
-
+          <IngredientList ingredients={ ingredients } />
         </ul>
         <p data-testid="instructions">{recipeDetails.strInstructions}</p>
         <p data-testid="video">Video</p>
         <div className="carousel">
-          { recommendedRecipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-            (index < SEIS && (
-              <Link to={ `/bebidas/${idDrink}` } key={ index }>
-                <RecommendedRecipe
-                  recipeName={ strDrink }
-                  recipeImage={ strDrinkThumb }
-                  index={ index }
-                  recipeCategory
-                />
-              </Link>))
-          )) }
+          <RecommendedRecipes recommendedRecipes={ recommendedRecipes } recipe />
         </div>
         <button
           type="button"

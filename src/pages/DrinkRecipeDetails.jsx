@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { requestRecipeDetailsById, getAllIngredientsFromRecipe,
   requestRecommendedRecipes } from '../services';
-import Ingredient from '../components/Ingredient';
-import RecommendedRecipe from '../components/RecommendedRecipe';
+import RecommendedRecipes from '../components/RecommendedRecipes';
+import IngredientList from '../components/IngredientList';
 
 export default function DrinkRecipeDetails({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
-
-  const SEIS = 6;
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -39,27 +36,15 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
         <button type="button" data-testid="favorite-btn">Favorite</button>
         <h4 data-testid="recipe-category">{recipeDetails.strAlcoholic}</h4>
         <ul>
-          {
-            ingredients.map((element, i) => (
-              <Ingredient key={ i } index={ i } ingredient={ element } />
-            ))
-          }
-
+          <IngredientList ingredients={ ingredients } />
         </ul>
         <p data-testid="instructions">{recipeDetails.strInstructions}</p>
         <p data-testid="video">Video</p>
         <div className="carousel">
-          { recommendedRecipes.map(({ idMeal, strMeal, strMealThumb }, index) => (
-            (index < SEIS && (
-              <Link to={ `/comidas/${idMeal}` } key={ index }>
-                <RecommendedRecipe
-                  recipeName={ strMeal }
-                  recipeImage={ strMealThumb }
-                  index={ index }
-                  recipeCategory
-                />
-              </Link>))
-          )) }
+          <RecommendedRecipes
+            recommendedRecipes={ recommendedRecipes }
+            recipe={ false }
+          />
         </div>
         <button
           type="button"
