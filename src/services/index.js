@@ -71,3 +71,13 @@ export const getRecipesByCategory = async (page, category) => {
   const { meals, drinks } = await apiResponse.json();
   return (meals || drinks);
 };
+
+export const defaultRecipes = async (page) => {
+  const objectOfUrl = {
+    bebidas: () => 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+    comidas: () => 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+  };
+  const apiResponse = await fetch(objectOfUrl[page]());
+  const { meals, drinks } = await apiResponse.json();
+  return (meals || drinks);
+};

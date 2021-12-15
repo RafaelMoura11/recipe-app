@@ -1,14 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
-import { getRecipesByCategory } from '../services';
+import { getRecipesByCategory, defaultRecipes } from '../services';
 
 function CategoryButton({ categoryName }) {
-  const { setRecipes, setCategory, searchBarValue: { page } } = useContext(MyContext);
+  const { setRecipes, setCategory,
+    category, searchBarValue: { page } } = useContext(MyContext);
   const handleClick = async () => {
-    const recipes = await getRecipesByCategory(page, categoryName);
-    setCategory(categoryName);
-    setRecipes(recipes);
+    if (category === categoryName) {
+      const recipes = await defaultRecipes(page);
+      setCategory();
+      setRecipes(recipes);
+    } else {
+      const recipes = await getRecipesByCategory(page, categoryName);
+      setCategory(categoryName);
+      setRecipes(recipes);
+    }
   };
 
   return (
