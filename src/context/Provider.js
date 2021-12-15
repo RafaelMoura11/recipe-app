@@ -11,11 +11,15 @@ function Provider({ children }) {
 
   const [recipes, setRecipes] = useState([]);
 
+  const [category, setCategory] = useState();
+
   const statesAndFunctions = {
     searchBarValue,
     setSearchBarValue,
     recipes,
     setRecipes,
+    category,
+    setCategory,
   };
   return (
     <MyContext.Provider value={ statesAndFunctions }>
