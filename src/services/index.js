@@ -1,18 +1,18 @@
 const searchAPIFromSearch = async (option, value, page) => {
   const objectOfUrl = {
     comidas: {
-      Ingrediente: (ingrediente) => `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
-      Nome: (nome) => `https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`,
-      'Primeira letra': (primeiraLetra) => `https://www.themealdb.com/api/json/v1/1/search.php?f=${primeiraLetra}`,
+      Ingrediente: () => `https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`,
+      Nome: () => `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`,
+      'Primeira letra': () => `https://www.themealdb.com/api/json/v1/1/search.php?f=${value}`,
     },
     bebidas: {
-      Ingrediente: (ingrediente) => `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
-      Nome: (nome) => `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nome}`,
-      'Primeira letra': (primeiraLetra) => `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${primeiraLetra}`,
+      Ingrediente: () => `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`,
+      Nome: () => `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${value}`,
+      'Primeira letra': () => `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${value}`,
     },
   };
   try {
-    const apiResponse = await fetch(objectOfUrl[page][option](value));
+    const apiResponse = await fetch(objectOfUrl[page][option]());
     const jsonResponse = await apiResponse.json();
     return jsonResponse;
   } catch (erro) {
