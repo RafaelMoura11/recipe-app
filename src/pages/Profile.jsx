@@ -20,7 +20,7 @@ export default function Profile({ history }) {
     <div>
       <Header title="Perfil" enable={ false } />
       <div data-testid="profile-email">
-        {email.email}
+        { email !== null ? email.email : '' }
       </div>
       <button
         type="button"
