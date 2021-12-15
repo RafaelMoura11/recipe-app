@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Recipe from './Recipe';
+import MyContext from '../context/MyContext';
 
 function DrinkRecipes({ recipes }) {
+  const { category } = useContext(MyContext);
   const DOZE = 12;
   return (
-    recipes.length === 1 ? <Redirect to={ `/bebidas/${recipes[0].idDrink}` } />
+    recipes.length === 1 && !category ? (
+      <Redirect to={ `/bebidas/${recipes[0].idDrink}` } />)
       : recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         (index < DOZE
           && (

@@ -51,3 +51,23 @@ export const requestRecommendedRecipes = async (page) => {
   const { meals, drinks } = await apiResponse.json();
   return (meals || drinks);
 };
+
+export const getCategoriesByPage = async (page) => {
+  const objectOfUrl = {
+    comidas: () => 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+    bebidas: () => 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
+  };
+  const apiResponse = await fetch(objectOfUrl[page]());
+  const { meals, drinks } = await apiResponse.json();
+  return (meals || drinks);
+};
+
+export const getRecipesByCategory = async (page, category) => {
+  const objectOfUrl = {
+    comidas: () => `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`,
+    bebidas: () => `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`,
+  };
+  const apiResponse = await fetch(objectOfUrl[page]());
+  const { meals, drinks } = await apiResponse.json();
+  return (meals || drinks);
+};
