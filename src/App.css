@@ -16,6 +16,21 @@
   width: 100%;
 }
 
+.carousel {
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+.carousel img {
+  max-width: 180px;
+}
+
+.start-btn {
+  bottom: 0;
+  position: fixed;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;

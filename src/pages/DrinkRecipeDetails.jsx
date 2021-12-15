@@ -10,6 +10,9 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
+
+  const SEIS = 6;
+
   useEffect(() => {
     const getRecipe = async () => {
       const recipe = await requestRecipeDetailsById(id, 'bebidas');
@@ -19,8 +22,8 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
       setRecommendedRecipes(recommendedRecipesResponse);
     };
     getRecipe();
-  }, []);
-  const SEIS = 6;
+  }, [id]);
+
   return (
     (
       recipeDetails
@@ -45,7 +48,7 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
         </ul>
         <p data-testid="instructions">{recipeDetails.strInstructions}</p>
         <p data-testid="video">Video</p>
-        <div>
+        <div className="carousel">
           { recommendedRecipes.map(({ idMeal, strMeal, strMealThumb }, index) => (
             (index < SEIS && (
               <Link to={ `/comidas/${idMeal}` } key={ index }>
@@ -57,9 +60,14 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
                 />
               </Link>))
           )) }
-
         </div>
-        <button type="button" data-testid="start-recipe-btn">Iniciar receita</button>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="start-btn"
+        >
+          Iniciar receita
+        </button>
       </div>
     )
     )
