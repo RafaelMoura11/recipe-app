@@ -1,10 +1,17 @@
 import React from 'react';
 import Ingredient from './Ingredient';
+import IngredientCheckBox from './IngredientCheckBox';
 
-function IngredientList({ ingredients }) {
+function IngredientList({ ingredients, progress, id }) {
   return (
     ingredients.map((element, i) => (
-      <Ingredient key={ i } index={ i } ingredient={ element } />
+      progress ? <IngredientCheckBox
+        key={ i }
+        index={ i }
+        ingredient={ element }
+        id={ id }
+      />
+        : <Ingredient key={ i } index={ i } ingredient={ element } />
     ))
   );
 }
