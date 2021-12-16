@@ -4,11 +4,17 @@ import { requestRecipeDetailsById, getAllIngredientsFromRecipe,
   requestRecommendedRecipes } from '../services';
 import RecommendedRecipes from '../components/RecommendedRecipes';
 import IngredientList from '../components/IngredientList';
+import shareIcon from '../images/shareIcon.svg';
 
-export default function DrinkRecipeDetails({ match: { params: { id } } }) {
+const copy = require('clipboard-copy');
+
+export default function DrinkRecipeDetails({ history,
+  location, match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
+  const [progressList, setProgressList] = useState([]);
+  const [copyed, setCopy] = useState(false);
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -19,7 +25,26 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
       setRecommendedRecipes(recommendedRecipesResponse);
     };
     getRecipe();
+    const progress = JSON.parse(localStorage.getItem('onProgress'));
+    if (progress === null) {
+      setProgressList([]);
+    } else {
+      setProgressList(progress);
+    }
   }, [id]);
+
+  const handleClick = () => {
+    localStorage.setItem(
+      'onProgress',
+      JSON.stringify([...progressList, recipeDetails.idDrink]),
+    );
+    history.push(`/bebidas/${id}/in-progress`);
+  };
+
+  const handleShare = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+    setCopy(true);
+  };
 
   return (
     (
@@ -32,7 +57,14 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
           alt="Recipe"
         />
         <h3 data-testid="recipe-title">{recipeDetails.strDrink}</h3>
-        <button type="button" data-testid="share-btn">Share</button>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ handleShare }
+        >
+          <img src={ shareIcon } alt="share-icon" />
+        </button>
+        { copyed && <p>Link copiado!</p> }
         <button type="button" data-testid="favorite-btn">Favorite</button>
         <h4 data-testid="recipe-category">{recipeDetails.strAlcoholic}</h4>
         <ul>
@@ -50,6 +82,7 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
           type="button"
           data-testid="start-recipe-btn"
           className="start-btn"
+          onClick={ handleClick }
         >
           Iniciar receita
         </button>
@@ -62,5 +95,11 @@ export default function DrinkRecipeDetails({ match: { params: { id } } }) {
 DrinkRecipeDetails.propTypes = {
   match: PropTypes.objectOf({
     params: PropTypes.number,
+  }).isRequired,
+  history: PropTypes.objectOf({
+    push: PropTypes.func,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 };
