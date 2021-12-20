@@ -71,14 +71,27 @@ export default function DrinkRecipeDetails({ history,
           recipe={ false }
         />
       </div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="start-btn"
-        onClick={ handleClick }
-      >
-        { isRecipeInProgress ? 'Continuar receita' : 'Iniciar receita' }
-      </button>
+      { isRecipeInProgress ? (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="start-btn"
+          onClick={ handleClick }
+          hidden={ !isRecipeInProgress }
+        >
+          Continuar Receita
+        </button>
+      ) : (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="start-btn"
+          onClick={ handleClick }
+          hidden={ isRecipeInProgress }
+        >
+          Iniciar Receita
+        </button>
+      ) }
     </div>
   );
 }
