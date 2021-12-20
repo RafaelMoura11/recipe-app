@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { isNull } from 'lodash';
 import { requestRecipeDetailsById, getAllIngredientsFromRecipe,
   requestRecommendedRecipes } from '../services';
 import RecommendedRecipes from '../components/RecommendedRecipes';
@@ -13,8 +14,8 @@ export default function FoodRecipeDetails({ history,
   const [recipeDetails, setRecipeDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
-  const [progressList, setProgressList] = useState([]);
   const [copyed, setCopy] = useState(false);
+  const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -25,19 +26,14 @@ export default function FoodRecipeDetails({ history,
       setRecommendedRecipes(recommendedRecipesResponse);
     };
     getRecipe();
-    const progress = JSON.parse(localStorage.getItem('onProgress'));
-    if (progress === null) {
-      setProgressList([]);
-    } else {
-      setProgressList(progress);
+    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (isNull(progress)) {
+      return setIsRecipeInProgress(false);
     }
+    return setIsRecipeInProgress(progress.meals[id]);
   }, [id]);
 
   const handleClick = () => {
-    localStorage.setItem(
-      'onProgress',
-      JSON.stringify([...progressList, recipeDetails.idMeal]),
-    );
     history.push(`/comidas/${id}/in-progress`);
   };
 
@@ -47,45 +43,40 @@ export default function FoodRecipeDetails({ history,
   };
 
   return (
-    (
-      recipeDetails
-    && (
-      <div>
-        <img
-          data-testid="recipe-photo"
-          src={ recipeDetails.strMealThumb }
-          alt="Recipe"
-        />
-        <h3 data-testid="recipe-title">{recipeDetails.strMeal}</h3>
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ handleShare }
-        >
-          <img src={ shareIcon } alt="share-icon" />
-        </button>
-        { copyed && <p>Link copiado!</p> }
-        <button type="button" data-testid="favorite-btn">Favorite</button>
-        <h4 data-testid="recipe-category">{recipeDetails.strCategory}</h4>
-        <ul>
-          <IngredientList ingredients={ ingredients } />
-        </ul>
-        <p data-testid="instructions">{recipeDetails.strInstructions}</p>
-        <p data-testid="video">Video</p>
-        <div className="carousel">
-          <RecommendedRecipes recommendedRecipes={ recommendedRecipes } recipe />
-        </div>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="start-btn"
-          onClick={ handleClick }
-        >
-          Iniciar receita
-        </button>
+    <div>
+      <img
+        data-testid="recipe-photo"
+        src={ recipeDetails.strMealThumb }
+        alt="Recipe"
+      />
+      <h3 data-testid="recipe-title">{recipeDetails.strMeal}</h3>
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ handleShare }
+      >
+        <img src={ shareIcon } alt="share-icon" />
+      </button>
+      { copyed && <p>Link copiado!</p> }
+      <button type="button" data-testid="favorite-btn">Favorite</button>
+      <h4 data-testid="recipe-category">{recipeDetails.strCategory}</h4>
+      <ul>
+        <IngredientList ingredients={ ingredients } />
+      </ul>
+      <p data-testid="instructions">{recipeDetails.strInstructions}</p>
+      <p data-testid="video">Video</p>
+      <div className="carousel">
+        <RecommendedRecipes recommendedRecipes={ recommendedRecipes } recipe />
       </div>
-    )
-    )
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className="start-btn"
+        onClick={ handleClick }
+      >
+        { isRecipeInProgress ? 'Continuar receita' : 'Iniciar receita' }
+      </button>
+    </div>
   );
 }
 
