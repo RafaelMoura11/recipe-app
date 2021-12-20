@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { isNull } from 'lodash';
 import IngredientList from '../components/IngredientList';
 import { getAllIngredientsFromRecipe, requestRecipeDetailsById } from '../services';
 import shareIcon from '../images/shareIcon.svg';
@@ -18,6 +19,16 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
       setRecipeDetails(recipe);
     };
     getRecipe();
+    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (isNull(progress)) {
+      const firstProgress = { cocktails: { [id]: [] }, meals: {} };
+      return localStorage.setItem('inProgressRecipes', JSON.stringify(firstProgress));
+    }
+    if (!progress.cocktails[id]) {
+      const updatedProgress = { ...progress,
+        cocktails: { ...progress.cocktails, [id]: [] } };
+      return localStorage.setItem('inProgressRecipes', JSON.stringify(updatedProgress));
+    }
   }, [id]);
 
   const handleShare = () => {

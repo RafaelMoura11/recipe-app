@@ -81,3 +81,42 @@ export const defaultRecipes = async (page) => {
   const { meals, drinks } = await apiResponse.json();
   return (meals || drinks);
 };
+
+export const addIngredientInProgressRecipes = (id, ingredient, object, page) => {
+  const objectOfKey = {
+    comidas: 'meals',
+    bebidas: 'cocktails',
+  };
+  const key = objectOfKey[page];
+  const newArrayOfIngredients = [...object[key][id], ingredient];
+  console.log(object[key][id]);
+  const newProgress = { ...object,
+    [key]: { ...object[key],
+      [id]: newArrayOfIngredients } };
+  return newProgress;
+};
+
+export const removeIngredientInProgressRecipes = (id, ingredient, object, page) => {
+  const objectOfKey = {
+    comidas: 'meals',
+    bebidas: 'cocktails',
+  };
+  const key = objectOfKey[page];
+  const arrayOfIngredients = object[key][id];
+
+  const newArrayOfIngredients = arrayOfIngredients.filter((element) => (
+    element !== ingredient));
+  const newProgress = { ...object,
+    [key]: { ...object[key],
+      [id]: newArrayOfIngredients } };
+  return newProgress;
+};
+
+export const checkIngredientsInLocalStorage = (currentProgress, ingredient, id, page) => {
+  const objectOfKey = {
+    comidas: 'meals',
+    bebidas: 'cocktails',
+  };
+  const key = objectOfKey[page];
+  return currentProgress[key][id].includes(ingredient);
+};
