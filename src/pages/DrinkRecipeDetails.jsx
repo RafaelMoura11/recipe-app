@@ -77,7 +77,6 @@ export default function DrinkRecipeDetails({ history,
           data-testid="start-recipe-btn"
           className="start-btn"
           onClick={ handleClick }
-          hidden={ !isRecipeInProgress }
         >
           Continuar Receita
         </button>
@@ -87,7 +86,6 @@ export default function DrinkRecipeDetails({ history,
           data-testid="start-recipe-btn"
           className="start-btn"
           onClick={ handleClick }
-          hidden={ isRecipeInProgress }
         >
           Iniciar Receita
         </button>
