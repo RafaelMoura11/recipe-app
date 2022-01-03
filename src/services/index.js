@@ -89,7 +89,6 @@ export const addIngredientInProgressRecipes = (id, ingredient, object, page) => 
   };
   const key = objectOfKey[page];
   const newArrayOfIngredients = [...object[key][id], ingredient];
-  console.log(object[key][id]);
   const newProgress = { ...object,
     [key]: { ...object[key],
       [id]: newArrayOfIngredients } };
