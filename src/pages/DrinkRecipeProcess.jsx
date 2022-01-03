@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { isNull } from 'lodash';
+import { useHistory } from 'react-router-dom';
 import IngredientList from '../components/IngredientList';
 import { getAllIngredientsFromRecipe, requestRecipeDetailsById } from '../services';
 import shareIcon from '../images/shareIcon.svg';
@@ -13,6 +14,7 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
   const [ingredients, setIngredients] = useState([]);
   const [copyed, setCopy] = useState(false);
   const { isAllIngredientsChecked, setIsAllIngredientsChecked } = useContext(MyContext);
+  const history = useHistory();
 
   useEffect(() => {
     setIsAllIngredientsChecked(false);
@@ -65,6 +67,7 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
         data-testid="finish-recipe-btn"
         className="start-btn"
         disabled={ !isAllIngredientsChecked }
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar receita
       </button>
