@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import { addIngredientInProgressRecipes, checkIngredientsInLocalStorage,
   removeIngredientInProgressRecipes } from '../services';
+import MyContext from '../context/MyContext';
 
-export default function IngredientCheckBox({ id, ingredient, index }) {
+export default function IngredientCheckBox({ id, ingredient, index, ingredients }) {
   const [check, setCheck] = useState(false);
   const { pathname } = useLocation();
   const page = pathname.split('/')[1];
+  const { setIsAllIngredientsChecked } = useContext(MyContext);
 
   const handleCheckBox = ({ target: { checked } }) => {
     setCheck(checked);
@@ -24,6 +26,15 @@ export default function IngredientCheckBox({ id, ingredient, index }) {
       ingredient, id, page);
     setCheck(isIngredientChecked);
   }, []);
+  useEffect(() => {
+    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const translatePageToEnglish = {
+      comidas: 'meals',
+      bebidas: 'cocktails',
+    };
+    const pageInEnglish = translatePageToEnglish[page];
+    setIsAllIngredientsChecked(ingredients.length === progress[pageInEnglish][id].length);
+  });
 
   return (
     <label
@@ -44,7 +55,10 @@ export default function IngredientCheckBox({ id, ingredient, index }) {
 }
 
 IngredientCheckBox.propTypes = {
-  ingredient: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+  ingredient: PropTypes.string.isRequired,
+  ingredients: PropTypes.shape({
+    length: PropTypes.number,
+  }).isRequired,
 };
