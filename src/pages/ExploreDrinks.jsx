@@ -8,7 +8,7 @@ export default function ExploreDrinks() {
     <div>
       <Header title="Explorar Bebidas" enable={ false } />
       <div>
-        <Link to="/explorar/comidas/ingredientes">
+        <Link to="/explorar/bebidas/ingredientes">
           <button
             type="button"
             data-testid="explore-by-ingredient"
@@ -17,23 +17,13 @@ export default function ExploreDrinks() {
             Por Ingredientes
           </button>
         </Link>
-        <Link to="/explorar/comidas/area">
+        <Link to="/explorar/bebidas/surpreenda">
           <button
             type="button"
-            data-testid="explore-by-area"
-            name="explore-by-area"
-            disabled
+            data-testid="explore-surprise"
+            name="explore-surprise"
           >
-            Por Local de Origem
-          </button>
-        </Link>
-        <Link to="/explorar/comidas/surpreenda">
-          <button
-            type="button"
-            data-testid="explore-by-surprise"
-            name="explore-by-surprise"
-          >
-            Me surpreenda!
+            Me Surpreenda!
           </button>
         </Link>
       </div>

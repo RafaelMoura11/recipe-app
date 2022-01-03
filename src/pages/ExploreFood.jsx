@@ -29,10 +29,10 @@ export default function ExploreFood() {
         <Link to="/explorar/comidas/surpreenda">
           <button
             type="button"
-            data-testid="explore-by-surprise"
-            name="explore-by-surprise"
+            data-testid="explore-surprise"
+            name="explore-surprise"
           >
-            Me surpreenda!
+            Me Surpreenda!
           </button>
         </Link>
       </div>
