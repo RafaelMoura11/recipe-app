@@ -8,18 +8,20 @@ export default function Explore() {
     <div>
       <Header title="Explorar" enable={ false } />
       <Link to="/explorar/comidas">
-        <h3
+        <button
+          type="button"
           data-testid="explore-food"
         >
           Explorar Comidas
-        </h3>
+        </button>
       </Link>
       <Link to="/explorar/bebidas">
-        <h3
+        <button
+          type="button"
           data-testid="explore-drinks"
         >
           Explorar Bebidas
-        </h3>
+        </button>
       </Link>
       <Footer />
     </div>
