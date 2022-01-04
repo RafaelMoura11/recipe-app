@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { isNull } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import IngredientList from '../components/IngredientList';
-import { getAllIngredientsFromRecipe, requestRecipeDetailsById } from '../services';
+import { getAllIngredientsFromRecipe, requestRecipeDetailsById,
+  dateNow } from '../services';
 import shareIcon from '../images/shareIcon.svg';
 import MyContext from '../context/MyContext';
 
@@ -48,9 +49,10 @@ export default function FoodRecipeProcess({ location, match: { params: { id } } 
       type: 'comida',
       area: recipeDetails.strArea,
       category: recipeDetails.strCategory,
+      alcoholicOrNot: recipeDetails.strAlcoholic,
       name: recipeDetails.strMeal,
       img: recipeDetails.strMealThumb,
-      doneDate: '',
+      doneDate: dateNow(),
       tags: recipeDetails.strTags,
     };
     if (isNull(doneRecipes)) {

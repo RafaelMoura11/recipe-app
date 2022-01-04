@@ -129,3 +129,12 @@ export const checkIngredientsInLocalStorage = (currentProgress, ingredient, id, 
   const key = objectOfKey[page];
   return currentProgress[key][id].includes(ingredient);
 };
+
+export const dateNow = () => {
+  const data = new Date();
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0');
+  const ano = data.getFullYear();
+  const dataAtual = `${dia}/${mes}/${ano}`;
+  return dataAtual;
+};
