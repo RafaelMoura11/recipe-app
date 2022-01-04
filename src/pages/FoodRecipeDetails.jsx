@@ -16,6 +16,16 @@ export default function FoodRecipeDetails({ history,
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
   const [copyed, setCopy] = useState(false);
   const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
+  const [isRecipeDone, setIsRecipeDone] = useState(false);
+
+  const checkIfRecipeIsAlreadyDone = (recipe) => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes) {
+      const checkResponse = doneRecipes.some((doneRecipe) => (
+        doneRecipe.id === recipe.idMeal));
+      return setIsRecipeDone(checkResponse);
+    }
+  };
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -23,6 +33,7 @@ export default function FoodRecipeDetails({ history,
       const recommendedRecipesResponse = await requestRecommendedRecipes('comidas');
       setIngredients(getAllIngredientsFromRecipe(recipe));
       setRecipeDetails(recipe);
+      checkIfRecipeIsAlreadyDone(recipe);
       setRecommendedRecipes(recommendedRecipesResponse);
     };
     getRecipe();
@@ -40,6 +51,34 @@ export default function FoodRecipeDetails({ history,
   const handleShare = () => {
     copy(`http://localhost:3000${location.pathname}`);
     setCopy(true);
+  };
+
+  const stateOfThisRecipe = () => {
+    if (isRecipeDone) {
+      return null;
+    }
+    if (isRecipeInProgress) {
+      return (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="start-btn"
+          onClick={ handleClick }
+        >
+          Continuar Receita
+        </button>
+      );
+    }
+    return (
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className="start-btn"
+        onClick={ handleClick }
+      >
+        Iniciar Receita
+      </button>
+    );
   };
 
   return (
@@ -68,25 +107,7 @@ export default function FoodRecipeDetails({ history,
       <div className="carousel">
         <RecommendedRecipes recommendedRecipes={ recommendedRecipes } recipe />
       </div>
-      { isRecipeInProgress ? (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="start-btn"
-          onClick={ handleClick }
-        >
-          Continuar Receita
-        </button>
-      ) : (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="start-btn"
-          onClick={ handleClick }
-        >
-          Iniciar Receita
-        </button>
-      ) }
+      { stateOfThisRecipe() }
     </div>
   );
 }

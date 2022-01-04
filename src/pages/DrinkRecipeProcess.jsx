@@ -41,6 +41,26 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
     setCopy(true);
   };
 
+  const finishingRecipe = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const doneRecipe = {
+      id: recipeDetails.idDrink,
+      type: 'bebida',
+      alcoholicOrNot: recipeDetails.strAlcoholic,
+      category: recipeDetails.strCategory,
+      name: recipeDetails.strDrink,
+      img: recipeDetails.strDrinkThumb,
+      doneDate: '',
+      tags: recipeDetails.strTags,
+    };
+    if (isNull(doneRecipes)) {
+      localStorage.setItem('doneRecipes', JSON.stringify([doneRecipe]));
+      return history.push('/receitas-feitas');
+    }
+    localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, doneRecipe]));
+    history.push('/receitas-feitas');
+  };
+
   return (
     <div>
       <img
@@ -67,7 +87,7 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
         data-testid="finish-recipe-btn"
         className="start-btn"
         disabled={ !isAllIngredientsChecked }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ finishingRecipe }
       >
         Finalizar receita
       </button>
