@@ -82,6 +82,16 @@ export const defaultRecipes = async (page) => {
   return (meals || drinks);
 };
 
+export const randomRecipes = async (page) => {
+  const objectOfUrl = {
+    bebidas: () => 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
+    comidas: () => 'https://www.themealdb.com/api/json/v1/1/random.php',
+  };
+  const apiResponse = await fetch(objectOfUrl[page]());
+  const { meals, drinks } = await apiResponse.json();
+  return (meals || drinks);
+};
+
 export const addIngredientInProgressRecipes = (id, ingredient, object, page) => {
   const objectOfKey = {
     comidas: 'meals',
