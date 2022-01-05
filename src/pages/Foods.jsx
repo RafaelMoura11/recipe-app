@@ -15,8 +15,10 @@ export default function Foods() {
   useEffect(() => {
     setSearchBarValue({ ...searchBarValue, page: 'comidas' });
     async function initialFoodRecipes() {
-      const initialRecipes = await requestRecommendedRecipes('bebidas');
-      setRecipes(initialRecipes);
+      if (!recipes.length) {
+        const initialRecipes = await requestRecommendedRecipes('bebidas');
+        setRecipes(initialRecipes);
+      }
       const allCategories = await getCategoriesByPage('comidas');
       setCategories(allCategories);
     }

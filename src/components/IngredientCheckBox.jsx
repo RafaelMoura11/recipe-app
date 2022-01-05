@@ -6,9 +6,11 @@ import { addIngredientInProgressRecipes, checkIngredientsInLocalStorage,
 import MyContext from '../context/MyContext';
 
 export default function IngredientCheckBox({ id, ingredient, index, ingredients }) {
-  const [check, setCheck] = useState(false);
+  const PROGRESS = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const { pathname } = useLocation();
   const page = pathname.split('/')[1];
+  const [check, setCheck] = useState(checkIngredientsInLocalStorage(PROGRESS,
+    ingredient, id, page));
   const { setIsAllIngredientsChecked } = useContext(MyContext);
 
   const handleCheckBox = ({ target: { checked } }) => {
@@ -20,12 +22,6 @@ export default function IngredientCheckBox({ id, ingredient, index, ingredients 
     localStorage.setItem('inProgressRecipes', JSON.stringify(newProgress));
   };
 
-  useEffect(() => {
-    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const isIngredientChecked = checkIngredientsInLocalStorage(progress,
-      ingredient, id, page);
-    setCheck(isIngredientChecked);
-  }, []);
   useEffect(() => {
     const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const translatePageToEnglish = {
@@ -46,7 +42,7 @@ export default function IngredientCheckBox({ id, ingredient, index, ingredients 
         onClick={ handleCheckBox }
         id={ ingredient }
         type="checkbox"
-        defaultChecked={ check }
+        checked={ check }
       />
       { ingredient }
       :
