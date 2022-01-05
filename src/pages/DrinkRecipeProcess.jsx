@@ -5,15 +5,13 @@ import { useHistory } from 'react-router-dom';
 import IngredientList from '../components/IngredientList';
 import { getAllIngredientsFromRecipe, requestRecipeDetailsById,
   dateNow } from '../services';
-import shareIcon from '../images/shareIcon.svg';
 import MyContext from '../context/MyContext';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
-const copy = require('clipboard-copy');
-
-export default function DrinkRecipeProcess({ location, match: { params: { id } } }) {
-  const [recipeDetails, setRecipeDetails] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
-  const [copyed, setCopy] = useState(false);
+export default function DrinkRecipeProcess({ match: { params: { id } } }) {
+  const [recipeDetails, setRecipeDetails] = useState();
+  const [ingredients, setIngredients] = useState();
   const { isAllIngredientsChecked, setIsAllIngredientsChecked } = useContext(MyContext);
   const history = useHistory();
 
@@ -37,11 +35,6 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
     }
   }, [id]);
 
-  const handleShare = () => {
-    copy(`http://localhost:3000${location.pathname}`);
-    setCopy(true);
-  };
-
   const finishingRecipe = () => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const doneRecipe = {
@@ -64,44 +57,46 @@ export default function DrinkRecipeProcess({ location, match: { params: { id } }
   };
 
   return (
-    <div>
-      <img
-        data-testid="recipe-photo"
-        src={ recipeDetails.strDrinkThumb }
-        alt="Recipe"
-      />
-      <h3 data-testid="recipe-title">{recipeDetails.strDrink}</h3>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShare }
-      >
-        <img src={ shareIcon } alt="share-icon" />
-      </button>
-      { copyed && <p>Link copiado!</p> }
-      <button type="button" data-testid="favorite-btn">Favorite</button>
-      <h4 data-testid="recipe-category">{recipeDetails.strAlcoholic}</h4>
-      <IngredientList ingredients={ ingredients } progress id={ id } />
-      <p data-testid="instructions">{recipeDetails.strInstructions}</p>
-      <p data-testid="video">Video</p>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-        className="start-btn"
-        disabled={ !isAllIngredientsChecked }
-        onClick={ finishingRecipe }
-      >
-        Finalizar receita
-      </button>
-    </div>
+    recipeDetails ? (
+      <div>
+        <img
+          data-testid="recipe-photo"
+          src={ recipeDetails.strDrinkThumb }
+          alt="Recipe"
+        />
+        <h3 data-testid="recipe-title">{recipeDetails.strDrink}</h3>
+        <ShareButton url={ `/bebidas/${id}` } />
+        <FavoriteButton
+          id={ recipeDetails.idDrink }
+          type="bebida"
+          area=""
+          category={ recipeDetails.strCategory }
+          alcoholicOrNot={ recipeDetails.strAlcoholic }
+          name={ recipeDetails.strDrink }
+          image={ recipeDetails.strDrinkThumb }
+        />
+        <h4 data-testid="recipe-category">{recipeDetails.strAlcoholic}</h4>
+        <IngredientList ingredients={ ingredients } progress id={ id } />
+        <p data-testid="instructions">{recipeDetails.strInstructions}</p>
+        <p data-testid="video">Video</p>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          className="start-btn"
+          disabled={ !isAllIngredientsChecked }
+          onClick={ finishingRecipe }
+        >
+          Finalizar receita
+        </button>
+      </div>
+    ) : (
+      <p>Loading...</p>
+    )
   );
 }
 
 DrinkRecipeProcess.propTypes = {
   match: PropTypes.objectOf({
     params: PropTypes.number,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
   }).isRequired,
 };

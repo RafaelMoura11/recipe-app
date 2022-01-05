@@ -138,3 +138,17 @@ export const dateNow = () => {
   const dataAtual = `${dia}/${mes}/${ano}`;
   return dataAtual;
 };
+
+export const checkRecipeInFavoriteRecipes = (recipeId, favoriteRecipes) => {
+  if (favoriteRecipes) {
+    return favoriteRecipes.some(({ id }) => recipeId === id);
+  }
+  return false;
+};
+
+export const addRecipeInFavoriteRecipes = (recipe, favoriteRecipes) => (
+  [...favoriteRecipes, recipe]);
+
+export const removeRecipeFromFavoriteRecipes = (recipeId, favoriteRecipes) => (
+  favoriteRecipes.filter(({ id }) => id !== recipeId)
+);
