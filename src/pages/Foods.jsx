@@ -3,34 +3,44 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MyContext from '../context/MyContext';
 import FoodRecipes from '../components/FoodRecipes';
-import { requestRecommendedRecipes, getCategoriesByPage } from '../services';
+import searchAPIFromSearch, { requestRecommendedRecipes,
+  getCategoriesByPage } from '../services';
 import AllCategoryButtons from '../components/AllCategoryButtons';
 
 export default function Foods() {
   const { searchBarValue, setSearchBarValue, recipes,
-    setRecipes } = useContext(MyContext);
+    setRecipes, ingredient } = useContext(MyContext);
 
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     setSearchBarValue({ ...searchBarValue, page: 'comidas' });
     async function initialFoodRecipes() {
+      const allCategories = await getCategoriesByPage('comidas');
+      setCategories(allCategories);
+      if (ingredient !== 'all') {
+        const recipesByIngredient = await searchAPIFromSearch('Ingrediente',
+          ingredient, 'comidas');
+        const values = Object.values(recipesByIngredient);
+        return setRecipes(values[0]);
+      }
       if (!recipes.length) {
         const initialRecipes = await requestRecommendedRecipes('bebidas');
         setRecipes(initialRecipes);
       }
-      const allCategories = await getCategoriesByPage('comidas');
-      setCategories(allCategories);
     }
     initialFoodRecipes();
   }, []);
 
   return (
-    <div>
-      <Header title="Comidas" />
-      <AllCategoryButtons categories={ categories } />
-      <FoodRecipes recipes={ recipes } />
-      <Footer />
-    </div>
+    recipes.length
+      ? (
+        <div>
+          <Header title="Comidas" />
+          <AllCategoryButtons categories={ categories } />
+          <FoodRecipes recipes={ recipes } />
+          <Footer />
+        </div>
+      ) : (<p>Loading...</p>)
   );
 }

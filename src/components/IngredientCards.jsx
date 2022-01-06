@@ -12,7 +12,6 @@ export default function IngredientCards({ info, page }) {
         page={ page }
       />))
   ));
-  console.log(info);
 
   return cards;
 }

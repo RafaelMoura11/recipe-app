@@ -19,6 +19,8 @@ function Provider({ children }) {
 
   const [ingredients, setIngredients] = useState([]);
 
+  const [ingredient, setIngredient] = useState('all');
+
   const statesAndFunctions = {
     searchBarValue,
     setSearchBarValue,
@@ -32,6 +34,8 @@ function Provider({ children }) {
     setFilter,
     ingredients,
     setIngredients,
+    ingredient,
+    setIngredient,
   };
   return (
     <MyContext.Provider value={ statesAndFunctions }>

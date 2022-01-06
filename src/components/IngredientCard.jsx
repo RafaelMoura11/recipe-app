@@ -1,19 +1,22 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getIngredients } from '../services';
 import MyContext from '../context/MyContext';
 
 export default function IngredientCard({ page, index, strIngredient, strIngredient1 }) {
-  const { setFilter, setIngredients } = useContext(MyContext);
-  const [click, setClick] = useState(false);
+  const { setFilter, setIngredients, setIngredient } = useContext(MyContext);
 
   const filterByIngredient = async () => {
     const ingredient = page === 'comidas' ? strIngredient : strIngredient1;
-    const recipes = await getIngredients(page);
+    const ingredients = await getIngredients(page);
     setFilter(ingredient);
-    setIngredients(recipes);
+    setIngredients(ingredients);
   };
+
+  useEffect(() => {
+    filterByIngredient();
+  }, []);
 
   let image = '';
   if (page === 'comidas') {
@@ -22,13 +25,13 @@ export default function IngredientCard({ page, index, strIngredient, strIngredie
     image = `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png`;
   }
 
+  const handleIngredient = () => {
+    setIngredient((strIngredient || strIngredient1));
+  };
+
   return (
     <Link
-      onClick={ async (event) => {
-        event.preventDefault();
-        await filterByIngredient();
-        setClick(true);
-      } }
+      onClick={ handleIngredient }
       to={ page === 'comidas' ? '/comidas' : '/bebidas' }
     >
       <div
@@ -48,9 +51,6 @@ export default function IngredientCard({ page, index, strIngredient, strIngredie
             { page === 'comidas' ? strIngredient : strIngredient1 }
           </h2>
         </div>
-        { click && <Redirect
-          to={ page === 'comidas' ? '/comidas' : '/bebidas' }
-        /> }
       </div>
     </Link>
   );
