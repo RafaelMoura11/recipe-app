@@ -13,7 +13,7 @@ function AllCategoryButtons({ categories }) {
     setRecipes(recipes);
   };
   return (
-    <>
+    <div className="buttons">
       <button
         data-testid="All-category-filter"
         type="button"
@@ -27,7 +27,7 @@ function AllCategoryButtons({ categories }) {
           categoryName={ strCategory }
         />
       ))}
-    </>
+    </div>
   );
 }
 

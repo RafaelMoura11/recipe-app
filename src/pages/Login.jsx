@@ -32,7 +32,7 @@ export default function Login({ history }) {
   }, [email, password]);
 
   return (
-    <div>
+    <div className="login">
       <input
         type="email"
         data-testid="email-input"

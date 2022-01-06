@@ -9,20 +9,21 @@ export default function Header({ title, enable = true }) {
   const [searchBar, setSearchBar] = useState(false);
 
   return (
-    <div>
-      <Link to="/perfil">
-        <img
-          src={ profileIcon }
-          alt="Profile Icon"
-          data-testid="profile-top-btn"
-        />
-      </Link>
-      <h1
-        data-testid="page-title"
-      >
-        {title}
-      </h1>
-      {enable
+    <div className="header-wrap">
+      <div className="header">
+        <Link to="/perfil">
+          <img
+            src={ profileIcon }
+            alt="Profile Icon"
+            data-testid="profile-top-btn"
+          />
+        </Link>
+        <h1
+          data-testid="page-title"
+        >
+          {title}
+        </h1>
+        {enable
         && (
           <button
             type="button"
@@ -35,6 +36,7 @@ export default function Header({ title, enable = true }) {
             />
           </button>
         )}
+      </div>
       {searchBar
         && <SearchBar />}
     </div>

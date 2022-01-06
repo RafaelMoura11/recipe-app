@@ -5,6 +5,7 @@ function Recipe({ recipeName, recipeImage, index, recommend }) {
   return (
     <div
       data-testid={ recommend ? `${index}-recomendation-card` : `${index}-recipe-card` }
+      className="recipe-card"
     >
       <img data-testid={ `${index}-card-img` } src={ recipeImage } alt={ recipeName } />
       <h4

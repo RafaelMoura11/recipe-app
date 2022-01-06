@@ -22,7 +22,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="search-bar">
       <div onChange={ handleChange }>
         <input
           type="radio"
@@ -49,20 +49,22 @@ function SearchBar() {
         {' '}
         Primeira letra
       </div>
-      <input
-        type="text"
-        onChange={ handleChange }
-        name="search-bar-value"
-        data-testid="search-input"
-      />
-      <button
-        type="button"
-        onClick={ handleClick }
-        data-testid="exec-search-btn"
-      >
-        Buscar
+      <div>
+        <input
+          type="text"
+          onChange={ handleChange }
+          name="search-bar-value"
+          data-testid="search-input"
+        />
+        <button
+          type="button"
+          onClick={ handleClick }
+          data-testid="exec-search-btn"
+        >
+          Buscar
 
-      </button>
+        </button>
+      </div>
     </div>
   );
 }
