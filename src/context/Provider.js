@@ -15,6 +15,12 @@ function Provider({ children }) {
 
   const [isAllIngredientsChecked, setIsAllIngredientsChecked] = useState(false);
 
+  const [filter, setFilter] = useState('');
+
+  const [ingredients, setIngredients] = useState([]);
+
+  const [ingredient, setIngredient] = useState('all');
+
   const statesAndFunctions = {
     searchBarValue,
     setSearchBarValue,
@@ -24,6 +30,12 @@ function Provider({ children }) {
     setCategory,
     isAllIngredientsChecked,
     setIsAllIngredientsChecked,
+    filter,
+    setFilter,
+    ingredients,
+    setIngredients,
+    ingredient,
+    setIngredient,
   };
   return (
     <MyContext.Provider value={ statesAndFunctions }>
