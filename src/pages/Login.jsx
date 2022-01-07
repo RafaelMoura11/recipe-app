@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import cooking from '../images/cooking.svg';
 
 export default function Login({ history }) {
   const [email, setEmail] = useState('');
@@ -32,27 +33,36 @@ export default function Login({ history }) {
   }, [email, password]);
 
   return (
-    <div className="login">
-      <input
-        type="email"
-        data-testid="email-input"
-        onChange={ handleEmail }
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        onChange={ handlePassword }
-        placeholder="Password"
-      />
-      <button
-        type="button"
-        onClick={ handleClick }
-        data-testid="login-submit-btn"
-        disabled={ disable }
-      >
-        Entrar
-      </button>
+    <div className="login-screen">
+      <div className="logo">
+        <img src={ cooking } alt="wooman cooking logo" />
+        <h2>Login</h2>
+        <div className="line" />
+      </div>
+      <div className="login">
+        <input
+          type="email"
+          data-testid="email-input"
+          onChange={ handleEmail }
+          placeholder="Email"
+          id="email"
+        />
+        <input
+          type="password"
+          data-testid="password-input"
+          onChange={ handlePassword }
+          placeholder="Password"
+          id="password"
+        />
+        <button
+          type="button"
+          onClick={ handleClick }
+          data-testid="login-submit-btn"
+          disabled={ disable }
+        >
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }
