@@ -40,6 +40,7 @@ export default function RecipesMade() {
             }
             <Link to={ `/${element.type}s/${element.id}` }>
               <img
+                className="imageCards"
                 alt={ `imagem${element.type}` }
                 data-testid={ `${index}-horizontal-image` }
                 src={ element.image }

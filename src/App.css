@@ -87,3 +87,7 @@
     transform: rotate(-10deg);
   }
 }
+
+.imageCards {
+  max-width: 360px;
+}
