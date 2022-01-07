@@ -21,7 +21,7 @@ export default function RecipesMade() {
         buttons.map(([button, teste]) => (
           <ButtonRecipiesMade button={ button } teste={ teste } key={ teste } />))
       }
-      { recipeDone
+      { recipeDone && recipeDone
         .filter(({ type }) => type.includes(filterButtons))
         .map((element, index) => (
           <div key={ element.id }>
