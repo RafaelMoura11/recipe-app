@@ -82,7 +82,7 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
           alt="Recipe"
         />
         <h3 data-testid="recipe-title">{recipeDetails.strMeal}</h3>
-        <ShareButton url={ `/comidas/${id}` } />
+        <ShareButton url={ `/comidas/${id}` } dataTestId="share-btn" />
         <FavoriteButton
           id={ recipeDetails.idMeal }
           type="comida"

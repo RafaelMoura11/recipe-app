@@ -15,6 +15,8 @@ function Provider({ children }) {
 
   const [isAllIngredientsChecked, setIsAllIngredientsChecked] = useState(false);
 
+  const [filterButtons, setFilterButtons] = useState('');
+
   const [filter, setFilter] = useState('');
 
   const [ingredients, setIngredients] = useState([]);
@@ -30,6 +32,8 @@ function Provider({ children }) {
     setCategory,
     isAllIngredientsChecked,
     setIsAllIngredientsChecked,
+    filterButtons,
+    setFilterButtons,
     filter,
     setFilter,
     ingredients,
