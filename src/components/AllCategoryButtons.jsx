@@ -8,15 +8,16 @@ function AllCategoryButtons({ categories }) {
   const { setRecipes, setCategory, searchBarValue: { page } } = useContext(MyContext);
   const CINCO = 5;
   const handleClick = async () => {
+    setRecipes([]);
     const recipes = await defaultRecipes(page);
-    setCategory();
+    setCategory('');
     setRecipes(recipes);
   };
   return (
     <>
       <button
-        data-testid="All-category-filter"
         type="button"
+        data-testid="All-category-filter"
         onClick={ handleClick }
       >
         All

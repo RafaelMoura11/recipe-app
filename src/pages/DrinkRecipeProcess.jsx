@@ -44,9 +44,9 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
       category: recipeDetails.strCategory,
       alcoholicOrNot: recipeDetails.strAlcoholic,
       name: recipeDetails.strDrink,
-      img: recipeDetails.strDrinkThumb,
+      image: recipeDetails.strDrinkThumb,
       doneDate: dateNow(),
-      tags: recipeDetails.strTags,
+      tags: [],
     };
     if (isNull(doneRecipes)) {
       localStorage.setItem('doneRecipes', JSON.stringify([doneRecipe]));
@@ -65,7 +65,7 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
           alt="Recipe"
         />
         <h3 data-testid="recipe-title">{recipeDetails.strDrink}</h3>
-        <ShareButton url={ `/bebidas/${id}` } />
+        <ShareButton url={ `/bebidas/${id}` } dataTestId="share-btn" />
         <FavoriteButton
           id={ recipeDetails.idDrink }
           type="bebida"
