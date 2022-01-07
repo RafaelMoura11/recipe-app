@@ -44,9 +44,9 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
       category: recipeDetails.strCategory,
       alcoholicOrNot: recipeDetails.strAlcoholic,
       name: recipeDetails.strMeal,
-      img: recipeDetails.strMealThumb,
+      image: recipeDetails.strMealThumb,
       doneDate: dateNow(),
-      tags: recipeDetails.strTags,
+      tags: (recipeDetails.strTags ? recipeDetails.strTags.split(',', 2) : []),
     };
     if (isNull(doneRecipes)) {
       localStorage.setItem('doneRecipes', JSON.stringify([doneRecipe]));
@@ -65,7 +65,7 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
           alt="Recipe"
         />
         <h3 data-testid="recipe-title">{recipeDetails.strMeal}</h3>
-        <ShareButton url={ `/comidas/${id}` } />
+        <ShareButton url={ `/comidas/${id}` } dataTestId="share-btn" />
         <FavoriteButton
           id={ recipeDetails.idMeal }
           type="comida"
