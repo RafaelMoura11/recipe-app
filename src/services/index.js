@@ -152,3 +152,13 @@ export const addRecipeInFavoriteRecipes = (recipe, favoriteRecipes) => (
 export const removeRecipeFromFavoriteRecipes = (recipeId, favoriteRecipes) => (
   favoriteRecipes.filter(({ id }) => id !== recipeId)
 );
+
+export const getIngredients = async (page) => {
+  const objectOfUrl = {
+    comidas: () => 'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
+    bebidas: () => 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
+  };
+  const apiResponse = await fetch(objectOfUrl[page]());
+  const { meals, drinks } = await apiResponse.json();
+  return (meals || drinks);
+};
