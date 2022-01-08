@@ -49,7 +49,7 @@ function Provider({ children }) {
 }
 
 Provider.propTypes = {
-  children: PropTypes.isRequired,
+  children: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 // Testeee

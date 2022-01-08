@@ -29,7 +29,7 @@ export default function Login({ history }) {
     const testEmail = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/i;
     if (testEmail.test(email) && password.length > minSize) {
       setDisable(false);
-    }
+    } else setDisable(true);
   }, [email, password]);
 
   return (
@@ -59,6 +59,7 @@ export default function Login({ history }) {
           onClick={ handleClick }
           data-testid="login-submit-btn"
           disabled={ disable }
+          className={ disable ? 'disabled' : 'enable' }
         >
           Entrar
         </button>

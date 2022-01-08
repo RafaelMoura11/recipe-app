@@ -19,26 +19,28 @@ export default function ExploreDrinks() {
     <div>
       <Header title="Explorar Bebidas" enable={ false } />
       <div>
-        <Link to="/explorar/bebidas/ingredientes">
-          <button
-            type="button"
-            data-testid="explore-by-ingredient"
-            name="explore-by-ingredient"
-          >
-            Por Ingredientes
-          </button>
-        </Link>
-        <Link to={ `/bebidas/${randomDrinkRecipeId}` }>
-          <button
-            type="button"
-            data-testid="explore-surprise"
-            name="explore-surprise"
-          >
-            Me Surpreenda!
-          </button>
-        </Link>
+        <div className="buttons">
+          <Link to="/explorar/bebidas/ingredientes">
+            <button
+              type="button"
+              data-testid="explore-by-ingredient"
+              name="explore-by-ingredient"
+            >
+              Por Ingredientes
+            </button>
+          </Link>
+          <Link to={ `/bebidas/${randomDrinkRecipeId}` }>
+            <button
+              type="button"
+              data-testid="explore-surprise"
+              name="explore-surprise"
+            >
+              Me Surpreenda!
+            </button>
+          </Link>
+        </div>
       </div>
-      <Footer />
+      <Footer fixed />
     </div>
   );
 }

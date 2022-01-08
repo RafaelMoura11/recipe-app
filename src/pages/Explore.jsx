@@ -7,23 +7,25 @@ export default function Explore() {
   return (
     <div>
       <Header title="Explorar" enable={ false } />
-      <Link to="/explorar/comidas">
-        <button
-          type="button"
-          data-testid="explore-food"
-        >
-          Explorar Comidas
-        </button>
-      </Link>
-      <Link to="/explorar/bebidas">
-        <button
-          type="button"
-          data-testid="explore-drinks"
-        >
-          Explorar Bebidas
-        </button>
-      </Link>
-      <Footer />
+      <div className="buttons">
+        <Link to="/explorar/comidas">
+          <button
+            type="button"
+            data-testid="explore-food"
+          >
+            Explorar Comidas
+          </button>
+        </Link>
+        <Link to="/explorar/bebidas">
+          <button
+            type="button"
+            data-testid="explore-drinks"
+          >
+            Explorar Bebidas
+          </button>
+        </Link>
+      </div>
+      <Footer fixed />
     </div>
   );
 }

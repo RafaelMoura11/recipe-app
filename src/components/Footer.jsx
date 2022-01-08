@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import MyContext from '../context/MyContext';
@@ -6,7 +7,7 @@ import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import { requestRecommendedRecipes } from '../services';
 
-export default function Footer() {
+export default function Footer({ fixed = false }) {
   const { setRecipes } = useContext(MyContext);
 
   const getFoodRecipes = async () => {
@@ -20,7 +21,7 @@ export default function Footer() {
   };
 
   return (
-    <div data-testid="footer" className="footer">
+    <div data-testid="footer" className={ fixed ? 'fixed' : 'footer' }>
       <Link to="/bebidas" onClick={ getDrinkRecipes }>
         <img src={ drinkIcon } alt="drinkIcon" data-testid="drinks-bottom-btn" />
       </Link>
@@ -37,3 +38,11 @@ export default function Footer() {
     </div>
   );
 }
+
+Footer.defaultProps = {
+  fixed: false,
+};
+
+Footer.propTypes = {
+  fixed: PropTypes.bool,
+};

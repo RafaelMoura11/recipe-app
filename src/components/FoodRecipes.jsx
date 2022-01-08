@@ -30,10 +30,7 @@ function FoodRecipes({ recipes }) {
 }
 
 FoodRecipes.propTypes = {
-  recipes: PropTypes.shape({
-    length: PropTypes.number,
-    map: PropTypes.func,
-  }).isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default FoodRecipes;

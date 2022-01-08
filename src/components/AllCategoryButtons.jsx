@@ -33,9 +33,7 @@ function AllCategoryButtons({ categories }) {
 }
 
 AllCategoryButtons.propTypes = {
-  categories: PropTypes.shape({
-    map: PropTypes.func,
-  }).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default AllCategoryButtons;

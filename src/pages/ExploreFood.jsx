@@ -19,35 +19,37 @@ export default function ExploreFood() {
     <div>
       <Header title="Explorar Comidas" enable={ false } />
       <div>
-        <Link to="/explorar/comidas/ingredientes">
-          <button
-            type="button"
-            data-testid="explore-by-ingredient"
-            name="explore-by-ingredient"
-          >
-            Por Ingredientes
-          </button>
-        </Link>
-        <Link to="/explorar/comidas/area">
-          <button
-            type="button"
-            data-testid="explore-by-area"
-            name="explore-by-area"
-          >
-            Por Local de Origem
-          </button>
-        </Link>
-        <Link to={ `/comidas/${randomMealRecipeId}` }>
-          <button
-            type="button"
-            data-testid="explore-surprise"
-            name="explore-surprise"
-          >
-            Me Surpreenda!
-          </button>
-        </Link>
+        <div className="buttons">
+          <Link to="/explorar/comidas/ingredientes">
+            <button
+              type="button"
+              data-testid="explore-by-ingredient"
+              name="explore-by-ingredient"
+            >
+              Por Ingredientes
+            </button>
+          </Link>
+          <Link to="/explorar/comidas/area">
+            <button
+              type="button"
+              data-testid="explore-by-area"
+              name="explore-by-area"
+            >
+              Por Local de Origem
+            </button>
+          </Link>
+          <Link to={ `/comidas/${randomMealRecipeId}` }>
+            <button
+              type="button"
+              data-testid="explore-surprise"
+              name="explore-surprise"
+            >
+              Me Surpreenda!
+            </button>
+          </Link>
+        </div>
       </div>
-      <Footer />
+      <Footer fixed />
     </div>
   );
 }

@@ -13,7 +13,11 @@ function DrinkRecipes({ recipes }) {
       : recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         (index < DOZE
           && (
-            <Link to={ `/bebidas/${idDrink}` } key={ strDrink }>
+            <Link
+              to={ `/bebidas/${idDrink}` }
+              key={ strDrink }
+              className="recipe-card-wrap"
+            >
               <Recipe
                 recipeName={ strDrink }
                 recipeImage={ strDrinkThumb }

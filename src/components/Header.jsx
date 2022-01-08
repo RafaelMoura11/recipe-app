@@ -43,7 +43,11 @@ export default function Header({ title, enable = true }) {
   );
 }
 
+Header.defaultProps = {
+  enable: true,
+};
+
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  enable: PropTypes.bool.isRequired,
+  enable: PropTypes.bool,
 };
