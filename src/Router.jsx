@@ -16,6 +16,7 @@ import ExploreFoodByArea from './pages/ExploreFoodByArea';
 import Profile from './pages/Profile';
 import RecipesMade from './pages/RecipesMade';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import NotFound from './pages/NotFound';
 
 function Router() {
   return (
@@ -100,6 +101,7 @@ function Router() {
         path="/receitas-favoritas"
         component={ FavoriteRecipes }
       />
+      <Route component={ NotFound } />
     </Switch>
   );
 }

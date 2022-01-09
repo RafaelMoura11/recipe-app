@@ -23,6 +23,8 @@ function Provider({ children }) {
 
   const [ingredient, setIngredient] = useState('all');
 
+  const [areas, setAreas] = useState();
+
   const statesAndFunctions = {
     searchBarValue,
     setSearchBarValue,
@@ -40,6 +42,8 @@ function Provider({ children }) {
     setIngredients,
     ingredient,
     setIngredient,
+    areas,
+    setAreas,
   };
   return (
     <MyContext.Provider value={ statesAndFunctions }>
@@ -51,7 +55,5 @@ function Provider({ children }) {
 Provider.propTypes = {
   children: PropTypes.objectOf(PropTypes.any).isRequired,
 };
-
-// Testeee
 
 export default Provider;
