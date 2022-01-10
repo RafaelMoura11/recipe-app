@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import getVideoId from 'get-video-id';
+import { FaChevronLeft } from 'react-icons/fa';
 import { isNull } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import IngredientList from '../components/IngredientList';
@@ -14,6 +16,7 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState();
   const [ingredients, setIngredients] = useState([]);
   const { isAllIngredientsChecked, setIsAllIngredientsChecked } = useContext(MyContext);
+  const [youtubeId, setYoutubeId] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -22,6 +25,9 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
       const recipe = await requestRecipeDetailsById(id, 'comidas');
       setIngredients(getAllIngredientsFromRecipe(recipe));
       setRecipeDetails(recipe);
+      if (recipe.strYoutube !== '') {
+        setYoutubeId(() => getVideoId(recipe.strYoutube));
+      }
     };
     getRecipe();
     const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -59,27 +65,61 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
 
   return (
     recipeDetails ? (
-      <div>
-        <img
-          data-testid="recipe-photo"
-          src={ recipeDetails.strMealThumb }
-          alt="Recipe"
-        />
-        <h3 data-testid="recipe-title">{recipeDetails.strMeal}</h3>
-        <ShareButton url={ `/comidas/${id}` } dataTestId="share-btn" />
-        <FavoriteButton
-          id={ recipeDetails.idMeal }
-          type="comida"
-          area={ recipeDetails.strArea }
-          category={ recipeDetails.strCategory }
-          alcoholicOrNot=""
-          name={ recipeDetails.strMeal }
-          image={ recipeDetails.strMealThumb }
-        />
-        <h4 data-testid="recipe-category">{recipeDetails.strCategory}</h4>
-        <IngredientList ingredients={ ingredients } progress id={ id } />
-        <p data-testid="instructions">{recipeDetails.strInstructions}</p>
-        <p data-testid="video">Video</p>
+      <>
+        <div className="recipe-page">
+          <div className="header stick">
+            <button type="button" onClick={ history.goBack }>
+              <FaChevronLeft />
+            </button>
+            <h2 data-testid="recipe-title">{recipeDetails.strMeal}</h2>
+            <p>{' '}</p>
+          </div>
+
+          <img
+            data-testid="recipe-photo"
+            src={ recipeDetails.strMealThumb }
+            alt="Recipe"
+            className="recipe-img"
+          />
+          <div className="favorite-name">
+            <div className="buttons-recipe">
+              <ShareButton url={ `/comidas/${id}` } dataTestId="share-btn" />
+              <FavoriteButton
+                id={ recipeDetails.idMeal }
+                type="comida"
+                area={ recipeDetails.strArea }
+                category={ recipeDetails.strCategory }
+                alcoholicOrNot=""
+                name={ recipeDetails.strMeal }
+                image={ recipeDetails.strMealThumb }
+              />
+            </div>
+            <h1
+              data-testid="recipe-title"
+            >
+              {recipeDetails.strMeal}
+            </h1>
+          </div>
+          <span data-testid="recipe-category">{recipeDetails.strCategory}</span>
+          <div className="ingredient-list">
+            <ul>
+              <IngredientList ingredients={ ingredients } progress id={ id } />
+            </ul>
+          </div>
+          {youtubeId === '' ? null : <iframe
+            src={ `https://www.youtube.com/embed/${youtubeId.id}` }
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />}
+          <p
+            data-testid="instructions"
+            className="instructions"
+          >
+            {recipeDetails.strInstructions}
+          </p>
+        </div>
         <button
           type="button"
           data-testid="finish-recipe-btn"
@@ -89,7 +129,7 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
         >
           Finalizar receita
         </button>
-      </div>
+      </>
     ) : (
       <Loading />
     )

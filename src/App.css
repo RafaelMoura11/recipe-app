@@ -50,6 +50,9 @@ iframe {
   padding-bottom: 1rem;
 }
 
+ul {
+  list-style-type: none;
+}
 
 .meals {
   align-items: center;
@@ -80,7 +83,6 @@ iframe {
 .header-wrap {
   flex-direction: column;
   gap: 1em;
-  padding-bottom: 1em;
   position: sticky;
   top: 0;
 }
@@ -96,9 +98,14 @@ iframe {
 
 .header {
   align-items: center;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   height: 5%;
+}
+
+.header div {
+  display: flex;
+  justify-content: space-around;
 }
 
 .search-bar {
@@ -106,13 +113,19 @@ iframe {
   background-color: white;
   display: flex;
   flex-direction: column;
+  margin-bottom: 0.3em;
   margin-top: -1rem;
   width: 100vw;
 }
 
+.active, .active .search-bar {
+  background-color: var(--primary-color);
+}
+
 .header button {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   border: none;
+  color: var(--dark-text);
 }
 
 .carousel {
@@ -300,6 +313,49 @@ iframe {
 
 .loading div {
   min-height: 100vh;
+}
+
+.recipe-card button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  width: 3rem;
+}
+
+.recipe-card button img {
+  border-radius: 0;
+}
+
+.card-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  width: 50%;
+}
+
+.card-content h2, .card-content p {
+  margin-bottom: 0;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 75vh;
+}
+
+.profile button {
+  border-radius: 0;
+  min-height: 20vh;
+}
+
+.profile p {
+  text-align: center;
 }
 
 /* .rocksGlass {

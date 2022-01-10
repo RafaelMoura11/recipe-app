@@ -33,20 +33,22 @@ export default function IngredientCheckBox({ id, ingredient, index, ingredients 
   });
 
   return (
-    <label
-      htmlFor={ ingredient }
-      className={ check && 'CheckBoxTrue' }
-      data-testid={ `${index}-ingredient-step` }
-    >
-      <input
-        onClick={ handleCheckBox }
-        id={ ingredient }
-        type="checkbox"
-        checked={ check }
-      />
-      { ingredient }
-      :
-    </label>
+    <li>
+      <label
+        htmlFor={ ingredient }
+        className={ check && 'CheckBoxTrue' }
+        data-testid={ `${index}-ingredient-step` }
+      >
+        <input
+          onClick={ handleCheckBox }
+          id={ ingredient }
+          type="checkbox"
+          checked={ check }
+        />
+        { ingredient }
+        :
+      </label>
+    </li>
   );
 }
 

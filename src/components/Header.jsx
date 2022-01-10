@@ -7,23 +7,38 @@ import SearchBar from './SearchBar';
 
 export default function Header({ title, enable = true }) {
   const [searchBar, setSearchBar] = useState(false);
+  const [active, setActive] = useState(false);
+
+  const changeBg = () => {
+    const PIXELS = 80;
+    if (window.scrollY >= PIXELS) {
+      setActive(true);
+    } else setActive(false);
+  };
+
+  window.addEventListener('scroll', changeBg);
 
   return (
-    <div className="header-wrap">
-      <div className="header">
-        <Link to="/perfil">
-          <img
-            src={ profileIcon }
-            alt="Profile Icon"
-            data-testid="profile-top-btn"
-          />
-        </Link>
-        <h1
-          data-testid="page-title"
-        >
-          {title}
-        </h1>
-        {enable
+    <div className={ active ? 'header-wrap active' : 'header-wrap' }>
+      <div className={ active ? 'header active' : 'header' }>
+        <div>
+          <Link to="/perfil">
+            <img
+              src={ profileIcon }
+              alt="Profile Icon"
+              data-testid="profile-top-btn"
+            />
+          </Link>
+        </div>
+        <div>
+          <h1
+            data-testid="page-title"
+          >
+            {title}
+          </h1>
+        </div>
+        <div>
+          {enable
         && (
           <button
             type="button"
@@ -36,6 +51,7 @@ export default function Header({ title, enable = true }) {
             />
           </button>
         )}
+        </div>
       </div>
       {searchBar
         && <SearchBar />}

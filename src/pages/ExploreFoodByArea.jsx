@@ -69,7 +69,7 @@ export default function ExploreFoodByArea() {
   return (
     <div>
       <Header title="Explorar Origem" />
-      <div>
+      <div className="dropdown">
         { !!areas.length && renderDropDown() }
       </div>
       <div>

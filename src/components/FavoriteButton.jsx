@@ -8,12 +8,10 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function FavoriteButton({ id, type, area, category, alcoholicOrNot, name, image }) {
   const FAVORITE = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  console.log(id);
   const [isFavorite, setIsFavorite] = useState(
     checkRecipeInFavoriteRecipes(id, FAVORITE),
   );
   const addOrRemoveRecipeFromFavoriteRecipes = () => {
-    console.log(id);
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const favoriteRecipe = {
       id,

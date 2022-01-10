@@ -19,30 +19,32 @@ export default function Profile({ history }) {
   return (
     <div>
       <Header title="Perfil" enable={ false } />
-      <div data-testid="profile-email">
-        { email !== null ? email.email : '' }
+      <div className="profile">
+        <p data-testid="profile-email">
+          { email !== null ? email.email : '' }
+        </p>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ () => history.push('/receitas-feitas') }
+        >
+          Receitas Feitas
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ () => history.push('/receitas-favoritas') }
+        >
+          Receitas Favoritas
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ handleLogout }
+        >
+          Sair
+        </button>
       </div>
-      <button
-        type="button"
-        data-testid="profile-done-btn"
-        onClick={ () => history.push('/receitas-feitas') }
-      >
-        Receitas Feitas
-      </button>
-      <button
-        type="button"
-        data-testid="profile-favorite-btn"
-        onClick={ () => history.push('/receitas-favoritas') }
-      >
-        Receitas Favoritas
-      </button>
-      <button
-        type="button"
-        data-testid="profile-logout-btn"
-        onClick={ handleLogout }
-      >
-        Sair
-      </button>
       <Footer />
     </div>
   );

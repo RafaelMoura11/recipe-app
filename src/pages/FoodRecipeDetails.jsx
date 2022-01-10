@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import getVideoId from 'get-video-id';
 import { FaChevronLeft } from 'react-icons/fa';
 import { isNull } from 'lodash';
-import { Link } from 'react-router-dom';
 import { requestRecipeDetailsById, getAllIngredientsFromRecipe,
   requestRecommendedRecipes } from '../services';
 import RecommendedRecipes from '../components/RecommendedRecipes';
@@ -86,9 +85,12 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
       <>
         <div className="recipe-page">
           <div className="header stick">
-            <Link to="/comidas"><FaChevronLeft /></Link>
-            <h2 data-testid="recipe-title">{recipeDetails.strMeal}</h2>
-            <p>{' '}</p>
+            <button type="button" onClick={ history.goBack }>
+              <FaChevronLeft />
+            </button>
+            <div>
+              <h2 data-testid="recipe-title">{recipeDetails.strMeal}</h2>
+            </div>
           </div>
           <img
             data-testid="recipe-photo"
