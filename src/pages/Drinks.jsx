@@ -6,6 +6,7 @@ import DrinkRecipes from '../components/DrinkRecipes';
 import searchAPIFromSearch, { requestRecommendedRecipes,
   getCategoriesByPage } from '../services';
 import AllCategoryButtons from '../components/AllCategoryButtons';
+import Loading from '../components/Loading';
 
 export default function Drinks() {
   const { searchBarValue, setSearchBarValue, recipes,
@@ -41,6 +42,8 @@ export default function Drinks() {
           <DrinkRecipes recipes={ recipes } />
           <Footer />
         </div>
-      ) : (<p>Loading...</p>)
+      ) : (
+        <Loading />
+      )
   );
 }

@@ -8,6 +8,7 @@ import { getAllIngredientsFromRecipe, requestRecipeDetailsById,
 import MyContext from '../context/MyContext';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import Loading from '../components/Loading';
 
 export default function DrinkRecipeProcess({ match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState();
@@ -90,7 +91,7 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
         </button>
       </div>
     ) : (
-      <p>Loading...</p>
+      <Loading />
     )
   );
 }

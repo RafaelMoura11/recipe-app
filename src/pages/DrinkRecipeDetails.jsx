@@ -10,6 +10,7 @@ import RecommendedRecipes from '../components/RecommendedRecipes';
 import IngredientList from '../components/IngredientList';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import Loading from '../components/Loading';
 
 export default function DrinkRecipeDetails({ history, match: { params: { id } } }) {
   const [recipeDetails, setRecipeDetails] = useState();
@@ -140,7 +141,7 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
         { stateOfThisRecipe() }
       </>
     ) : (
-      <p>Loading...</p>
+      <Loading />
     )
   );
 }

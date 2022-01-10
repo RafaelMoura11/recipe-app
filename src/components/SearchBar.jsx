@@ -62,7 +62,6 @@ function SearchBar() {
           data-testid="exec-search-btn"
         >
           Buscar
-
         </button>
       </div>
     </div>

@@ -160,6 +160,10 @@ iframe {
   max-width: 80vw;
 }
 
+.imageCards {
+  max-width: 360px;
+}
+
 .recipe-card img {
   border-radius: 0 10px 10px 0;
   width: 50%;
@@ -283,6 +287,21 @@ iframe {
   flex-direction: column;
 }
 
+.loading, .loading div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loading {
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loading div {
+  min-height: 100vh;
+}
+
 /* .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
@@ -324,8 +343,4 @@ iframe {
   100% {
     transform: rotate(-10deg);
   }
-}
-
-.imageCards {
-  max-width: 360px;
 }
