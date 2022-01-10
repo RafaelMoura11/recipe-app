@@ -30,7 +30,7 @@ export default function FavoriteRecipes() {
             <ButtonRecipiesMade button={ button } teste={ teste } key={ teste } />))
         }
       </div>
-      { favoriteRecipes
+      { favoriteRecipes && favoriteRecipes
         .filter(({ type }) => type.includes(filterButtons))
         .map((item, index) => (
           <div key={ item.id }>
