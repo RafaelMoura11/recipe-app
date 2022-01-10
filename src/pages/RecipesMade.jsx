@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import ButtonRecipiesMade from '../components/ButtonsRecipiesMade';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';

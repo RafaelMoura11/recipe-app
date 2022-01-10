@@ -82,7 +82,7 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
           alt="Recipe"
         />
         <h3 data-testid="recipe-title">{recipeDetails.strMeal}</h3>
-        <ShareButton url={ `/comidas/${id}` } dataTestId="share-btn" />
+        <ShareButton url={ `/comidas/${recipeDetails.idMeal}` } dataTestId="share-btn" />
         <FavoriteButton
           id={ recipeDetails.idMeal }
           type="comida"
@@ -91,6 +91,7 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
           alcoholicOrNot=""
           name={ recipeDetails.strMeal }
           image={ recipeDetails.strMealThumb }
+          dataTestId="favorite-btn"
         />
         <h4 data-testid="recipe-category">{recipeDetails.strCategory}</h4>
         <ul>
