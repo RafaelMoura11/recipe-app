@@ -6,7 +6,8 @@ import { addRecipeInFavoriteRecipes, checkRecipeInFavoriteRecipes,
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-function FavoriteButton({ id, type, area, category, alcoholicOrNot, name, image }) {
+function FavoriteButton({ id, type, area, category, alcoholicOrNot, name, image,
+  dataTestId }) {
   const FAVORITE = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [isFavorite, setIsFavorite] = useState(
     checkRecipeInFavoriteRecipes(id, FAVORITE),
@@ -47,7 +48,7 @@ function FavoriteButton({ id, type, area, category, alcoholicOrNot, name, image 
     >
       <img
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-        data-testid="favorite-btn"
+        data-testid={ dataTestId }
         alt="favorite-icon"
       />
     </button>
@@ -55,6 +56,7 @@ function FavoriteButton({ id, type, area, category, alcoholicOrNot, name, image 
 }
 
 FavoriteButton.propTypes = {
+  dataTestId: PropTypes.string.isRequired,
   alcoholicOrNot: PropTypes.string.isRequired,
   area: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,

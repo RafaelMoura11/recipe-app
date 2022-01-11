@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FaChevronLeft } from 'react-icons/fa';
 import { isNull } from 'lodash';
 import getVideoId from 'get-video-id';
-// import { Link } from 'react-router-dom';
 import { requestRecipeDetailsById, getAllIngredientsFromRecipe,
   requestRecommendedRecipes } from '../services';
 import RecommendedRecipes from '../components/RecommendedRecipes';
