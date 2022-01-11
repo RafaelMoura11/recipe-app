@@ -82,7 +82,7 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
           alt="Recipe"
         />
         <h3 data-testid="recipe-title">{recipeDetails.strDrink}</h3>
-        <ShareButton url={ `/bebidas/${id}` } dataTestId="share-btn" />
+        <ShareButton url={ `/bebidas/${recipeDetails.idDrink}` } dataTestId="share-btn" />
         <FavoriteButton
           id={ recipeDetails.idDrink }
           type="bebida"
@@ -91,6 +91,7 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
           alcoholicOrNot={ recipeDetails.strAlcoholic }
           name={ recipeDetails.strDrink }
           image={ recipeDetails.strDrinkThumb }
+          dataTestId="favorite-btn"
         />
         <h4 data-testid="recipe-category">{recipeDetails.strAlcoholic}</h4>
         <ul>
