@@ -71,18 +71,17 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
             <button type="button" onClick={ history.goBack }>
               <FaChevronLeft />
             </button>
-            <h2 data-testid="recipe-title">{recipeDetails.strDrink}</h2>
+            <h2>{recipeDetails.strDrink}</h2>
             <p>{' '}</p>
           </div>
           <img
-            data-testid="recipe-photo"
             src={ recipeDetails.strDrinkThumb }
             alt="Recipe"
             className="recipe-img"
           />
           <div className="favorite-name">
             <div className="buttons-recipe">
-              <ShareButton url={ `/bebidas/${id}` } dataTestId="share-btn" />
+              <ShareButton url={ `/bebidas/${id}` } />
               <FavoriteButton
                 id={ recipeDetails.idDrink }
                 type="bebida"
@@ -95,7 +94,7 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
             </div>
             <h1 className="recipe-title">{recipeDetails.strDrink}</h1>
           </div>
-          <span data-testid="recipe-category">{recipeDetails.strAlcoholic}</span>
+          <span>{recipeDetails.strAlcoholic}</span>
           <div className="ingredient-list">
             <ul>
               <IngredientList ingredients={ ingredients } progress id={ id } />
@@ -109,7 +108,6 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
             allowFullScreen
           />}
           <p
-            data-testid="instructions"
             className="instructions"
           >
             {recipeDetails.strInstructions}
@@ -117,7 +115,6 @@ export default function DrinkRecipeProcess({ match: { params: { id } } }) {
         </div>
         <button
           type="button"
-          data-testid="finish-recipe-btn"
           className="start-btn"
           disabled={ !isAllIngredientsChecked }
           onClick={ finishingRecipe }

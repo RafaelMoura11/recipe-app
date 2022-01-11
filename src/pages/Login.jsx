@@ -42,14 +42,12 @@ export default function Login({ history }) {
       <div className="login">
         <input
           type="email"
-          data-testid="email-input"
           onChange={ handleEmail }
           placeholder="Email"
           id="email"
         />
         <input
           type="password"
-          data-testid="password-input"
           onChange={ handlePassword }
           placeholder="Password"
           id="password"
@@ -57,7 +55,6 @@ export default function Login({ history }) {
         <button
           type="button"
           onClick={ handleClick }
-          data-testid="login-submit-btn"
           disabled={ disable }
           className={ disable ? 'disabled' : 'enable' }
         >

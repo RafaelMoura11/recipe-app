@@ -5,7 +5,7 @@ import { addIngredientInProgressRecipes, checkIngredientsInLocalStorage,
   removeIngredientInProgressRecipes } from '../services';
 import MyContext from '../context/MyContext';
 
-export default function IngredientCheckBox({ id, ingredient, index, ingredients }) {
+export default function IngredientCheckBox({ id, ingredient, ingredients }) {
   const PROGRESS = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const { pathname } = useLocation();
   const page = pathname.split('/')[1];
@@ -37,7 +37,6 @@ export default function IngredientCheckBox({ id, ingredient, index, ingredients 
       <label
         htmlFor={ ingredient }
         className={ check && 'CheckBoxTrue' }
-        data-testid={ `${index}-ingredient-step` }
       >
         <input
           onClick={ handleCheckBox }
@@ -54,7 +53,6 @@ export default function IngredientCheckBox({ id, ingredient, index, ingredients 
 
 IngredientCheckBox.propTypes = {
   id: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
   ingredient: PropTypes.string.isRequired,
   ingredients: PropTypes.shape({
     length: PropTypes.number,

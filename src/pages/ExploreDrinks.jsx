@@ -23,7 +23,6 @@ export default function ExploreDrinks() {
           <Link to="/explorar/bebidas/ingredientes">
             <button
               type="button"
-              data-testid="explore-by-ingredient"
               name="explore-by-ingredient"
             >
               Por Ingredientes
@@ -32,7 +31,6 @@ export default function ExploreDrinks() {
           <Link to={ `/bebidas/${randomDrinkRecipeId}` }>
             <button
               type="button"
-              data-testid="explore-surprise"
               name="explore-surprise"
             >
               Me Surpreenda!

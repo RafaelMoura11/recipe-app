@@ -23,7 +23,6 @@ export default function ExploreFood() {
           <Link to="/explorar/comidas/ingredientes">
             <button
               type="button"
-              data-testid="explore-by-ingredient"
               name="explore-by-ingredient"
             >
               Por Ingredientes
@@ -32,7 +31,6 @@ export default function ExploreFood() {
           <Link to="/explorar/comidas/area">
             <button
               type="button"
-              data-testid="explore-by-area"
               name="explore-by-area"
             >
               Por Local de Origem
@@ -41,7 +39,6 @@ export default function ExploreFood() {
           <Link to={ `/comidas/${randomMealRecipeId}` }>
             <button
               type="button"
-              data-testid="explore-surprise"
               name="explore-surprise"
             >
               Me Surpreenda!

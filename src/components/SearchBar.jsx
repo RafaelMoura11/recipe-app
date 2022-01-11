@@ -28,7 +28,6 @@ function SearchBar() {
           type="radio"
           value="Ingrediente"
           name="search-bar-option"
-          data-testid="ingredient-search-radio"
         />
         {' '}
         Ingrediente
@@ -36,7 +35,6 @@ function SearchBar() {
           type="radio"
           value="Nome"
           name="search-bar-option"
-          data-testid="name-search-radio"
         />
         {' '}
         Nome
@@ -44,7 +42,6 @@ function SearchBar() {
           type="radio"
           value="Primeira letra"
           name="search-bar-option"
-          data-testid="first-letter-search-radio"
         />
         {' '}
         Primeira letra
@@ -54,12 +51,10 @@ function SearchBar() {
           type="text"
           onChange={ handleChange }
           name="search-bar-value"
-          data-testid="search-input"
         />
         <button
           type="button"
           onClick={ handleClick }
-          data-testid="exec-search-btn"
         >
           Buscar
         </button>

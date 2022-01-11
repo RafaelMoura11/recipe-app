@@ -26,14 +26,11 @@ export default function Header({ title, enable = true }) {
             <img
               src={ profileIcon }
               alt="Profile Icon"
-              data-testid="profile-top-btn"
             />
           </Link>
         </div>
         <div>
-          <h1
-            data-testid="page-title"
-          >
+          <h1>
             {title}
           </h1>
         </div>
@@ -47,7 +44,6 @@ export default function Header({ title, enable = true }) {
             <img
               src={ searchIcon }
               alt="Search Icon"
-              data-testid="search-top-btn"
             />
           </button>
         )}

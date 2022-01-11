@@ -71,12 +71,11 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
             <button type="button" onClick={ history.goBack }>
               <FaChevronLeft />
             </button>
-            <h2 data-testid="recipe-title">{recipeDetails.strMeal}</h2>
+            <h2>{recipeDetails.strMeal}</h2>
             <p>{' '}</p>
           </div>
 
           <img
-            data-testid="recipe-photo"
             src={ recipeDetails.strMealThumb }
             alt="Recipe"
             className="recipe-img"
@@ -94,13 +93,11 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
                 image={ recipeDetails.strMealThumb }
               />
             </div>
-            <h1
-              data-testid="recipe-title"
-            >
+            <h1>
               {recipeDetails.strMeal}
             </h1>
           </div>
-          <span data-testid="recipe-category">{recipeDetails.strCategory}</span>
+          <span>{recipeDetails.strCategory}</span>
           <div className="ingredient-list">
             <ul>
               <IngredientList ingredients={ ingredients } progress id={ id } />
@@ -114,7 +111,6 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
             allowFullScreen
           />}
           <p
-            data-testid="instructions"
             className="instructions"
           >
             {recipeDetails.strInstructions}
@@ -122,7 +118,6 @@ export default function FoodRecipeProcess({ match: { params: { id } } }) {
         </div>
         <button
           type="button"
-          data-testid="finish-recipe-btn"
           className="start-btn"
           disabled={ !isAllIngredientsChecked }
           onClick={ finishingRecipe }

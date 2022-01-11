@@ -21,15 +21,15 @@ export default function Footer({ fixed = false }) {
   };
 
   return (
-    <div data-testid="footer" className={ fixed ? 'fixed' : 'footer' }>
+    <div className={ fixed ? 'fixed' : 'footer' }>
       <Link to="/comidas" onClick={ getFoodRecipes }>
-        <img src={ mealIcon } alt="mealIcon" data-testid="food-bottom-btn" />
+        <img src={ mealIcon } alt="mealIcon" />
       </Link>
       <Link to="/explorar">
-        <img src={ exploreIcon } alt="exploreIcon" data-testid="explore-bottom-btn" />
+        <img src={ exploreIcon } alt="exploreIcon" />
       </Link>
       <Link to="/bebidas" onClick={ getDrinkRecipes }>
-        <img src={ drinkIcon } alt="drinkIcon" data-testid="drinks-bottom-btn" />
+        <img src={ drinkIcon } alt="drinkIcon" />
       </Link>
     </div>
   );

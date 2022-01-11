@@ -1,8 +1,8 @@
+/* eslint-disable react/jsx-max-depth */
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
-import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import ButtonRecipiesMade from '../components/ButtonsRecipiesMade';
 import MyContext from '../context/MyContext';
@@ -22,9 +22,9 @@ export default function FavoriteRecipes() {
   const buttons = [['', 'All'], ['comida', 'Food'], ['bebida', 'Drink']];
 
   return (
-    <div>
-      <div>
-        <Header title="Receitas Favoritas" enable={ false } />
+    <>
+      <Header title="Receitas Favoritas" enable={ false } />
+      <div className="buttons">
         {
           buttons.map(([button, teste]) => (
             <ButtonRecipiesMade button={ button } teste={ teste } key={ teste } />))
@@ -32,67 +32,56 @@ export default function FavoriteRecipes() {
       </div>
       { favoriteRecipes && favoriteRecipes
         .filter(({ type }) => type.includes(filterButtons))
-        .map((item, index) => (
-          <div key={ item.id }>
-            <div>
-              <Link to={ `/${item.type}s/${item.id}` }>
+        .map((item) => (
+          <div key={ item.id } className="recipe-card-wrap">
+            <div
+              onKeyPress={ removeRecipes }
+              role="button"
+              onClick={ removeRecipes }
+              tabIndex={ 0 }
+              className="favorite"
+            >
+              <FavoriteButton
+                id={ item.id }
+                type={ item.type }
+                area={ item.area }
+                category={ item.category }
+                alcoholicOrNot={ item.alcoholicOrNot }
+                name={ item.name }
+                image={ item.image }
+              />
+            </div>
+            <Link to={ `/${item.type}s/${item.id}` }>
+              <div className="recipe-card">
                 <img
-                  className="imageCards"
-                  data-testid={ `${index}-horizontal-image` }
                   src={ item.image }
                   alt={ item.name }
                 />
-                <h2
-                  data-testid={ `${index}-horizontal-name` }
-                >
-                  {item.name}
-                </h2>
-              </Link>
-              { item.area ? (
-                <h3
-                  data-testid={ `${index}-horizontal-top-text` }
-                >
-                  {`${item.area} - ${item.category}`}
-                </h3>
-              )
-                : (
-                  <>
-                    <h3
-                      data-testid={ `${index}-horizontal-top-text` }
-                    >
-                      { item.alcoholicOrNot }
-                    </h3>
+                <div className="card-content">
+                  <h2>
+                    {item.name}
+                  </h2>
+                  {item.area ? (
                     <h3>
-                      {item.category}
+                      {`${item.area} - ${item.category}`}
                     </h3>
-
-                  </>
-                )}
-              <ShareButton
-                dataTestId={ `${index}-horizontal-share-btn` }
-                url={ `/${item.type}s/${item.id}` }
-              />
-              <div
-                onKeyPress={ removeRecipes }
-                role="button"
-                onClick={ removeRecipes }
-                tabIndex={ 0 }
-              >
-                <FavoriteButton
-                  dataTestId={ `${index}-horizontal-favorite-btn` }
-                  id={ item.id }
-                  type={ item.type }
-                  area={ item.area }
-                  category={ item.category }
-                  alcoholicOrNot={ item.alcoholicOrNot }
-                  name={ item.name }
-                  image={ item.image }
-                />
+                  )
+                    : (
+                      <>
+                        <h3>
+                          {item.alcoholicOrNot}
+                        </h3>
+                        <h3>
+                          {item.category}
+                        </h3>
+                      </>
+                    )}
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
-    </div>
+    </>
   );
 }
 

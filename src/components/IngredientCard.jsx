@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getIngredients } from '../services';
 import MyContext from '../context/MyContext';
 
-export default function IngredientCard({ page, index, strIngredient, strIngredient1 }) {
+export default function IngredientCard({ page, strIngredient, strIngredient1 }) {
   const { setFilter, setIngredients, setIngredient } = useContext(MyContext);
 
   const filterByIngredient = async () => {
@@ -33,24 +33,16 @@ export default function IngredientCard({ page, index, strIngredient, strIngredie
     <Link
       onClick={ handleIngredient }
       to={ page === 'comidas' ? '/comidas' : '/bebidas' }
+      className="recipe-card-wrap"
     >
-      <div
-        data-testid={ `${index}-ingredient-card` }
-      >
-        <div
-          data-testid={ `${index}-recipe-card` }
-        >
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ image }
-            alt={ `${strIngredient} img` }
-          />
-          <h2
-            data-testid={ `${index}-card-name` }
-          >
-            { page === 'comidas' ? strIngredient : strIngredient1 }
-          </h2>
-        </div>
+      <div className="recipe-card explore">
+        <img
+          src={ image }
+          alt={ `${strIngredient} img` }
+        />
+        <h4>
+          { page === 'comidas' ? strIngredient : strIngredient1 }
+        </h4>
       </div>
     </Link>
   );
@@ -58,7 +50,6 @@ export default function IngredientCard({ page, index, strIngredient, strIngredie
 
 IngredientCard.propTypes = {
   page: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   strIngredient: PropTypes.string.isRequired,
   strIngredient1: PropTypes.string.isRequired,
 };

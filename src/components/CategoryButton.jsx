@@ -20,7 +20,6 @@ function CategoryButton({ categoryName }) {
 
   return (
     <button
-      data-testid={ `${categoryName}-category-filter` }
       type="button"
       onClick={ handleClick }
     >

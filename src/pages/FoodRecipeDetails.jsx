@@ -60,7 +60,6 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
       return (
         <button
           type="button"
-          data-testid="start-recipe-btn"
           className="start-btn"
           onClick={ handleClick }
         >
@@ -71,7 +70,6 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
     return (
       <button
         type="button"
-        data-testid="start-recipe-btn"
         className="start-btn"
         onClick={ handleClick }
       >
@@ -89,11 +87,10 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
               <FaChevronLeft />
             </button>
             <div>
-              <h2 data-testid="recipe-title">{recipeDetails.strMeal}</h2>
+              <h2>{recipeDetails.strMeal}</h2>
             </div>
           </div>
           <img
-            data-testid="recipe-photo"
             src={ recipeDetails.strMealThumb }
             alt="Recipe"
             className="recipe-img"
@@ -117,7 +114,7 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
               {recipeDetails.strMeal}
             </h1>
           </div>
-          <span data-testid="recipe-category">{recipeDetails.strCategory}</span>
+          <span>{recipeDetails.strCategory}</span>
           <div className="ingredient-list">
             <ul>
               <IngredientList ingredients={ ingredients } />
@@ -131,7 +128,6 @@ export default function FoodRecipeDetails({ history, match: { params: { id } } }
             allowFullScreen
           />}
           <p
-            data-testid="instructions"
             className="instructions"
           >
             {recipeDetails.strInstructions}

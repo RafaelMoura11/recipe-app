@@ -60,7 +60,6 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
       return (
         <button
           type="button"
-          data-testid="start-recipe-btn"
           className="start-btn"
           onClick={ handleClick }
         >
@@ -71,7 +70,6 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
     return (
       <button
         type="button"
-        data-testid="start-recipe-btn"
         className="start-btn"
         onClick={ handleClick }
       >
@@ -89,18 +87,17 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
               <FaChevronLeft />
             </button>
             <div>
-              <h2 data-testid="recipe-title">{recipeDetails.strDrink}</h2>
+              <h2>{recipeDetails.strDrink}</h2>
             </div>
           </div>
           <img
-            data-testid="recipe-photo"
             src={ recipeDetails.strDrinkThumb }
             alt="Recipe"
             className="recipe-img"
           />
           <div className="favorite-name">
             <div className="buttons-recipe">
-              <ShareButton url={ `/bebidas/${id}` } dataTestId="share-btn" />
+              <ShareButton url={ `/bebidas/${id}` } />
               <FavoriteButton
                 id={ recipeDetails.idDrink }
                 type="bebida"
@@ -113,7 +110,7 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
             </div>
             <h1 className="recipe-title">{recipeDetails.strDrink}</h1>
           </div>
-          <span data-testid="recipe-category">{recipeDetails.strAlcoholic}</span>
+          <span>{recipeDetails.strAlcoholic}</span>
           <div className="ingredient-list">
             <ul>
               <IngredientList ingredients={ ingredients } />
@@ -127,7 +124,6 @@ export default function DrinkRecipeDetails({ history, match: { params: { id } } 
             allowFullScreen
           />}
           <p
-            data-testid="instructions"
             className="instructions"
           >
             {recipeDetails.strInstructions}

@@ -24,7 +24,7 @@ export default function RecipesMade() {
       </div>
       { recipeDone && recipeDone
         .filter(({ type }) => type.includes(filterButtons))
-        .map((element, index) => (
+        .map((element) => (
           <Link
             to={ `/${element.type}s/${element.id}` }
             key={ element.id }
@@ -32,21 +32,18 @@ export default function RecipesMade() {
           >
             <div className="recipe-card">
               <img
-                className="imageCards"
                 alt={ `imagem${element.type}` }
-                data-testid={ `${index}-horizontal-image` }
                 src={ element.image }
               />
               <div className="card-content">
-                <h2 data-testid={ `${index}-horizontal-name` }>{element.name}</h2>
+                <h2>{element.name}</h2>
                 <span>done on</span>
-                <p data-testid={ `${index}-horizontal-done-date` }>{element.doneDate}</p>
+                <p>{element.doneDate}</p>
                 {
                   element.tags
                     .map((tag) => (
                       <p
                         key={ tag }
-                        data-testid={ `${index}-${tag}-horizontal-tag` }
                       >
                         {tag}
                       </p>
@@ -54,12 +51,12 @@ export default function RecipesMade() {
                 }
                 {
                   element.area ? (
-                    <p data-testid={ `${index}-horizontal-top-text` }>
+                    <p>
                       {`${element.area} - ${element.category}`}
                     </p>
                   )
                     : (
-                      <p data-testid={ `${index}-horizontal-top-text` }>
+                      <p>
                         {element.alcoholicOrNot}
 
                       </p>

@@ -11,7 +11,6 @@ export default function Explore() {
         <Link to="/explorar/comidas">
           <button
             type="button"
-            data-testid="explore-food"
           >
             Explorar Comidas
           </button>
@@ -19,7 +18,6 @@ export default function Explore() {
         <Link to="/explorar/bebidas">
           <button
             type="button"
-            data-testid="explore-drinks"
           >
             Explorar Bebidas
           </button>

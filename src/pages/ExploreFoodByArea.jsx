@@ -21,7 +21,6 @@ export default function ExploreFoodByArea() {
     const options = areas.map(({ strArea }) => (
       <option
         value={ strArea }
-        data-testid={ `${strArea}-option` }
         key={ strArea }
         onClick={ () => setFilter(strArea) }
       >
@@ -36,11 +35,9 @@ export default function ExploreFoodByArea() {
           setFilter(value);
           console.log(value);
         } }
-        data-testid="explore-by-area-dropdown"
       >
         <option
           value="All"
-          data-testid="All-option"
         >
           All
         </option>

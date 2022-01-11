@@ -10,7 +10,6 @@ function ButtonRecipiesMade({ button, teste }) {
   return (
     <button
       type="button"
-      data-testid={ `filter-by-${teste.toLowerCase()}-btn` }
       onClick={ handleClick }
     >
       {teste}

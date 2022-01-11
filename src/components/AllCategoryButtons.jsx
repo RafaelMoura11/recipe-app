@@ -17,7 +17,6 @@ function AllCategoryButtons({ categories }) {
     <div className="buttons">
       <button
         type="button"
-        data-testid="All-category-filter"
         onClick={ handleClick }
       >
         All
