@@ -28,7 +28,8 @@ export const getAllIngredientsFromRecipe = (recipe) => {
   const allKeysAndValuesOfRecipe = Object.entries(recipe);
   const allIngredients = allKeysAndValuesOfRecipe.filter(([key, value]) => (
     key.includes('Ingredient') && value)).map((element, i) => (
-    `${element[1]} - ${recipe[`strMeasure${i + 1}`]}`));
+    recipe[`strMeasure${i + 1}`] ? `${element[1]} - ${recipe[`strMeasure${i + 1}`]}`
+      : `${element[1]}`));
   return allIngredients;
 };
 
