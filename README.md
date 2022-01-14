@@ -22,6 +22,8 @@ A base de dados são 2 APIs distintas, uma para [comidas](https://www.themealdb.
 
 ![](https://github.com/GeZudo/recipe-app/blob/main/demo.gif?raw=true)
 
+Por ser uma aplicação mobile only ao abrir no computador usar o inspecionar e colocar no tamanho 360x640
+
 
 ## Funcionalidades
 
